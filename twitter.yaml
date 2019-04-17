@@ -1,0 +1,61 @@
+swagger: "2.0"
+info:
+  description: "Descriere"
+  version: "1.0.0"
+  title: "Twitter posts API"
+host: "api.twitter.com"
+basePath: "/1.1"
+tags:
+- name: "post"
+  description: "Everything about your posts"
+  
+schemes:
+- "https"
+- "http"
+
+paths:
+  "/search/tweets.json":
+    get:
+      tags:
+      - "post"
+      summary: "Find posta by hashtag on Twitter"
+      operationId: "getPostByHashTagOnTwitter"
+      parameters:
+      - name: "q"
+        in: "query"
+        description: "Hashtag of posts that needs to be fetched"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ArrayOfPosts"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "No posts found"
+          
+definitions:
+    
+  Post:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      text:
+        type: "string"
+      place:
+        type: "string"
+      created_at:
+        type: "string"
+    xml:
+      name: "Post"
+      
+  ArrayOfPosts:
+    type: "array"
+    items:
+      $ref: '#/definitions/Post'
+    xml:
+      name: "PosArrayOfPostst"

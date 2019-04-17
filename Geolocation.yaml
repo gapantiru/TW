@@ -1,0 +1,58 @@
+swagger: "2.0"
+info:
+  description: "Descriere"
+  version: "1.0.0"
+  title: "Geolocation API"
+host: "www.googleapis.com"
+basePath: "/geolocation/v1"
+tags:
+- name: "location"
+  description: "Alta descriere"
+  
+schemes:
+- "https"
+- "http"
+
+paths:
+  "/geolocate":
+    get:
+      tags:
+      - "location"
+      summary: "Find location of user"
+      operationId: "getUserLocation"
+      parameters:
+      - name: "key"
+        in: "query"
+        description: "API_KEY"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Geolocation"
+        400:
+          description: "Your API key is not valid for the Geolocation API."
+        404:
+          description: "The request was valid, but no results were returned."
+          
+definitions:
+    
+  Location:
+    type: "object"
+    properties:
+      lat:
+        type: "integer"
+        format: "int64"
+      lng:
+        type: "integer"
+        format: "int64"
+      
+  Geolocation:
+    type: "object"
+    properties:
+      location:
+        $ref: "#/definitions/Location"
+      accuracy:
+        type: "integer"
+        format: "int64"
