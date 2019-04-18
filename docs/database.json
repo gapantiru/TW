@@ -1,0 +1,55 @@
+{
+    "users": [
+        {
+            "id": 0,
+            "username": "",
+            "first_name": "",
+            "phone_number": "",
+            "company_name": "",
+            "email": "",
+            "password": "MD5 / CRC32",
+            "my_announcements": [
+                "ids_to_announcements"
+            ],
+            "saved_announcements": [
+                "ids_to_announcements"
+            ],
+			"settings": {}
+        }
+    ],
+    "announcements": [
+        {
+            "id": 0,
+            "seller": "id_to_user",
+            "category": "Apartment / House / Field",
+            "type": "Sell / Rent",
+            "title": "",
+            "description": "",
+            "price": 1.11,
+            "address": "",
+            "coordinates": {
+                "latitude": 2.33,
+                "longitute": 1.2
+            },
+            "specific_data": {
+                "apartment": {
+                    "partitioning": "",
+                    "comfort": "",
+                    "floor": 1,
+                    "nr_of_rooms": 2,
+                    "surface": 200
+                },
+                "house": {
+                    "land_area": 200.2,
+                    "year_of_construction": 1998,
+                    "surface": 200
+                },
+                "ground": {
+                    "ground_type": "",
+                    "land_area": 1500.2,
+                    "land_classification": ""
+                }
+            }
+        }
+    ]
+}
