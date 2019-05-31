@@ -8,19 +8,35 @@ class AnnouncementController{
 
     static getAnnouncements(req, res, next){
 
-        Announcement.find({})
-            .then( announcements => {
-                if(announcements){
-                    utils.set_content_json(res, 200);
-                    res.end(JSON.stringify(announcements));
-                }
-                else{
-                    utils.send_error_json(res, "No announcements in database");
-                }
-            })
-            .catch( err => {
-                next(err);
-            })
+        if (req.query) {
+            Announcement.find(req.query)
+                .then(announcements => {
+                    if (announcements) {
+                        utils.set_content_json(res, 200);
+                        res.end(JSON.stringify(announcements));
+                    } else {
+                        utils.send_error_json(res, 400, "No announcements in database");
+                    }
+                })
+                .catch(err => {
+                    next(err);
+                })
+        }
+        else
+            {
+                Announcement.find({})
+                    .then(announcements => {
+                        if (announcements) {
+                            utils.set_content_json(res, 200);
+                            res.end(JSON.stringify(announcements));
+                        } else {
+                            utils.send_error_json(res, "No announcements in database");
+                        }
+                    })
+                    .catch(err => {
+                        next(err);
+                    })
+            }
 
     }
 
