@@ -12,7 +12,43 @@ class AnnouncementController{
             .then( announcements => {
                 if(announcements){
                     utils.set_content_json(res, 200);
+
                     res.end(JSON.stringify(announcements));
+                }
+                else{
+                    utils.send_error_json(res, "No announcements in database");
+                }
+            })
+            .catch( err => {
+                next(err);
+            })
+
+    }
+
+    static getMarkers(req, res, next){
+
+        Announcement.find({})
+            .then(announcements => {
+                if(announcements){
+                    utils.set_content_json(res, 200);
+
+                    const markers = [];
+                    announcements.forEach(element => {
+                        const marker = {};
+                        if(element.coordinates) {
+                            marker.coordinates = element.coordinates;
+                        }
+                        if(element.address) {
+                            marker.address = element.address;
+                        }
+                        if(element.description) {
+                            marker.description = element.description;
+                        }
+
+                        markers.push(marker);
+                    });
+
+                    res.end(JSON.stringify(markers));
                 }
                 else{
                     utils.send_error_json(res, "No announcements in database");
@@ -64,6 +100,7 @@ class AnnouncementController{
     static init_routes(router) {
 
         router.get('/api/announcements', middlewares.get_querystring_data,this.getAnnouncements);
+        router.get('/api/markers', middlewares.get_querystring_data,this.getMarkers);
         router.get('/api/announcements/:id', this.getAnnouncementById);
 
         router.post('/api/announcements' , middlewares.login_required, middlewares.get_body_data, this.addAnnouncement);
