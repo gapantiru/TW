@@ -10,7 +10,7 @@ let isEmptyObject = function(obj) {
 
 exports.get_body_data = function(req, res, next){
 
-    let body = [];
+    let    body = [];
     req.on('data', (chunk) => {
         body.push(chunk);
     });

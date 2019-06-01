@@ -18,3 +18,5 @@ exports.mongodb_options = {
 };
 
 exports.mongodb_uri = 'mongodb://127.0.0.1:27017/PERF';
+
+exports.resourcesPath = './resources/';
