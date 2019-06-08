@@ -5,6 +5,7 @@ let utils           = require('../utils');
 let middlewares     = require('../utils/middlewares');
 let bcrypt          = require('bcrypt');
 let jwt             = require('jsonwebtoken');
+let dependencies    = require('../utils/dependencies');
 
 
 class UserController {
@@ -18,7 +19,6 @@ class UserController {
                         utils.set_content_json(res, 200);
                         res.end(JSON.stringify(users));
                     } else {
-                        // next("No users in database");
                         utils.send_error_json(res,400, "No users in database");
                     }
                 })
@@ -33,7 +33,6 @@ class UserController {
                         utils.set_content_json(res, 200);
                         res.end(JSON.stringify(users));
                     } else {
-                        // next("No users in database");
                         utils.send_error_json(res,400, "No users in database");
                     }
                 })
@@ -55,7 +54,6 @@ class UserController {
                     utils.set_content_json(res, 200);
                     res.end(JSON.stringify(user));
                 } else {
-                    // next('User not found');
                     utils.send_error_json(res, 400, "User not found");
                 }
             })
@@ -65,7 +63,6 @@ class UserController {
     }
 
     static addUser(req, res, next) {
-// utils.load_body(req, res, (req, res) => { //add json object in req.body
         let new_user = new User(req.body);
         new_user.hash_password = bcrypt.hashSync(req.body.password, 10);
         let error = new_user.validateSync();
@@ -75,22 +72,85 @@ class UserController {
                     utils.send_success_json(res, "User created!");
                 })
                 .catch(err => {
-                    utils.send_error_json(res, err);
+                    utils.send_error_json(res, 400, err.message);
                 });
         } else {
-            utils.send_error_json(res, error.message);
+            utils.send_error_json(res, 400, error._message);
+            // utils.send_model_error(res, 401, error.errors);
         }
+    }
+
+    static deleteUser(req, res, next){
+
+        let userId = req.params.id;
+        if (!mongoose.Types.ObjectId.isValid(userId)){
+            utils.send_error_json(res, "Invalid user id!");
+        }
+        userId =  mongoose.Types.ObjectId(userId);
+        User.findOne({_id: userId})
+            .then( user =>{
+                if(user) {
+                    dependencies.remove_user_announcements(userId, function (err) {
+                        if (err) {
+                            utils.send_error_json(res, 400, "Failed removing user announcements!");
+                        } else {
+                            user.remove(err => {
+                                if (err) {
+                                    utils.send_error_json(res, 400, "Failed removing user!");
+                                } else {
+                                    LOG('send response');
+                                    utils.send_success_json(res, "User removed!");
+                                }
+
+                            });
+                        }
+                    })
+                }
+                else{
+                    utils.send_error_json(res, 400, "User not found!");
+                }
+            })
+            .catch( err =>{
+                utils.send_error_json(res, 500,"Failed removing user!");
+            });
+
+    }
+
+    static updateUser(req, res, next){
+
+        let userId = req.params.id;
+        if (!mongoose.Types.ObjectId.isValid(userId)){
+            utils.send_error_json(res, 400,"Invalid user id!");
+        }
+        userId =  mongoose.Types.ObjectId(userId);
+        User.findOne({_id: userId})
+            .then( user => {
+                return Object.assign(user, req.body);
+            })
+            .then((model) => {
+            return model.save();
+            })
+            .then((updatedModel) => {
+                utils.send_success_json(res, 'User Updated!')
+            }).catch((err) => {
+                utils.send_error_json(res, 500, err);
+            });
+
     }
 
     static sign_in(req, res, next){
 
+        if(req.body === undefined){
+            utils.send_error_json(res, 400, "no data provided!");
+        }
+
         User.findOne({
             email: req.body.email
-        })
+            })
             .then( user =>{
-                if(user !== undefined){
+                if(user){
                     if(!user.comparePassword(req.body.password)){
-                        utils.send_error_json(res, 401, "Authentication failed. Wrong password.'");
+                        utils.send_error_json(res, 400, "Wrong password.");
                     }
                     else{
                         utils.send_json_data(res, {
@@ -99,11 +159,11 @@ class UserController {
                     }
                 }
                 else{
-                    utils.send_error_json( res, 401, 'Authentication failed. User not found.');
+                    utils.send_error_json( res, 400, 'User not found.');
                 }
             })
             .catch( err =>{
-                utils.send_error_json( res, 400, err);
+                utils.send_error_json( res, 500, err);
             });
 
     }
@@ -116,7 +176,11 @@ class UserController {
 
         router.post('/api/users', middlewares.get_body_data, this.addUser);
 
-        router.post('/api/signin', middlewares.get_body_data, this.sign_in);
+        router.post('/api/login', middlewares.get_body_data, this.sign_in);
+
+        router.delete('/api/users/:id', this.deleteUser);
+
+        router.put('/api/users/:id', middlewares.get_body_data, this.updateUser);
 
     }
 

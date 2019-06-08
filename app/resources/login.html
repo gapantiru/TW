@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -9,23 +9,117 @@
 
 <body>
 <div id="overlay"></div>
-<form class="login-box">
+<form id='login-form' class="login-box">
     <h1>Login</h1>
     <div class="textbox">
         <i class="fas fa-user"></i>
-        <input type="text" placeholder="Username">
+        <input type="email" id="email" placeholder="Email" required>
     </div>
 
     <div class="textbox">
         <i class="fas fa-lock"></i>
-        <input type="password" placeholder="Password">
+        <input type="password" id="password" placeholder="Password" required>
     </div>
 
-    <input type="button" class="buton" value="Sign in">
+    <div id="msg" class="message">
+<!--        messages here! -->
+    </div>
+
+    <div>
+    <input type="submit" class="buton" value="Sign in">
     <a href="/signup" style="color: white">Register here!</a>
 
     </div>
 </form>
+<script>
+
+    let clear_form = () =>{
+        let form = document.getElementById('login-form');
+        if (form) form.reset();
+    };
+
+    let redirect_on_succes = () =>{
+        window.location.href = "/main_page";
+    };
+
+    let clear_message = function () {
+        let info = document.getElementById("msg");
+
+        if (info.classList.contains("message-err"))
+            info.classList.remove("message-err");
+
+        if (!info.classList.contains("message"))
+            info.classList.add("message");
+
+        info.innerText = "";
+    };
+
+    let show_message = function(message){
+        let info = document.getElementById("msg");
+        clear_message();
+
+        info.classList.add("message-err");
+        info.innerText = message;
+    };
+
+    document.getElementById('login-form').addEventListener('submit', function (event) {
+
+        event.preventDefault();
+
+        const URL = '/api/login';
+        const method = 'POST';
+
+        let email = document.getElementById("email");
+        let password = document.getElementById("password");
+
+        if (email === undefined || password === undefined) {
+            // show_error("Something went wrong. Reload the page.");
+            return;
+        }
+
+        let req_obj ={
+            "email": email.value,
+            "password": password.value
+        };
+
+        let request = new Request(URL,
+            {
+                method: method,
+                mode: 'no-cors',
+                body: JSON.stringify(req_obj),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+        fetch(request)
+            .then(response => {
+                let contentType = response.headers.get('Content-Type');
+                if (contentType && contentType.includes('application/json')) {
+                    return response;
+                }
+                throw new TypeError ('Datele primite nu-s JSON');
+            })
+            .then(response => {
+                //TODO:save JWT token from response;
+                if (response.status === 200) {
+                    clear_form();
+                    redirect_on_succes();
+                }
+                else{
+                    return response.json();
+                }
+            })
+            .then(json =>{
+                show_message(json.message);
+            })
+            .catch( err =>{
+                console.log(err);
+            })
+    });
+
+
+</script>
 
 </body>
 

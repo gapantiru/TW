@@ -31,17 +31,25 @@ let user_schema = {
             message: props => `${props.value} is not a valid email!`
         }
     },
+    phone: {
+        type: String,
+        required: false,
+        validate: {
+            validator: validator.isMobilePhone,
+            message: props => `${props.value} is not a valid phone number!`
+        }
+    },
     hash_password: {
         type: String,
         required: [true, 'password is required'],
         hidden: true
     },
     my_announcements: {
-        type: mongoose.ObjectId,
+        type: [mongoose.Schema.ObjectId],
         ref: 'Announcement'
     },
     saved_announcements: {
-        type: mongoose.ObjectId,
+        type: [mongoose.Schema.ObjectId],
         ref: 'Announcement'
     },
     joined :{
@@ -64,5 +72,13 @@ UserSchema.virtual('fullName')
     this.name.last = v.substr(v.indexOf(' ') + 1);
 });
 
-// exports.user_schema = user_schema;
+UserSchema.post('save', function(error, doc, next) {
+    if (error.name === 'MongoError' && error.code === 11000) {
+        next(new Error('Email used!'));
+    } else {
+        next(error);
+    }
+});
+
+
 module.exports = mongoose.model('User', UserSchema);

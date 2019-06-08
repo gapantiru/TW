@@ -7,27 +7,126 @@
 </head>
 <body>
 <div id="overlay"></div>
-<form class="signup-box">
+<form id='register-form' class="signup-box">
     <h1>Sign up</h1>
     <div class="textbox">
         <i class="fas fa-user"></i>
-        <input type="text" placeholder="Name">
+        <input id="first_name" type="text" placeholder="First name" required>
     </div>
     <div class="textbox">
         <i class="fas fa-user"></i>
-        <input type="text" placeholder="Username">
+        <input id="last_name" type="text" placeholder="Last name" required>
     </div>
     <div class="textbox">
         <i class="fas fa-envelope"></i>
-        <input type="email" placeholder="Email">
+        <input id="email" type="email" placeholder="Email" required>
     </div>
     <div class="textbox">
         <i class="fas fa-lock"></i>
-        <input type="password" placeholder="Password">
+        <input id="password" type="password" placeholder="Password" required>
     </div>
 
-    <input type="button" class="buton" value="Register">
+    <div id="msg" class="message">
+        <!--        messages here! -->
+    </div>
+
+    <input type="submit" class="buton" value="Register">
     <a href="/login" style="color: white">Login here!</a>
 </form>
+
+<script>
+
+    let clear_form = () =>{
+        let form = document.getElementById('register-form');
+        if (form) form.reset();
+    };
+
+    let redirect_on_succes = () =>{
+        window.location.href = "/login";
+    };
+
+    let clear_message = function () {
+        let info = document.getElementById("msg");
+
+        if (info.classList.contains("message-err"))
+            info.classList.remove("message-err");
+
+        if (!info.classList.contains("message"))
+            info.classList.add("message");
+
+        info.innerText = "";
+    };
+
+    let show_message = function(message){
+        let info = document.getElementById("msg");
+        clear_message();
+
+        info.classList.add("message-err");
+        info.innerText = message;
+    };
+
+    document.getElementById('register-form').addEventListener('submit', function (event) {
+
+        event.preventDefault();
+
+        const URL = '/api/users';
+        const method = 'POST';
+
+        let email = document.getElementById("email");
+        let first_name = document.getElementById("first_name");
+        let last_name = document.getElementById("last_name");
+        let password = document.getElementById("password");
+
+        if (email === undefined || password === undefined || first_name === undefined || last_name === undefined) {
+            // show_error("Something went wrong. Reload the page.");
+            return;
+        }
+
+        let req_obj ={
+            "email": email.value,
+            "password": password.value,
+            "name": {
+                "first": first_name.value,
+                "last": last_name.value
+            }
+        };
+
+        let request = new Request(URL,
+            {
+                method: method,
+                mode: 'no-cors',
+                body: JSON.stringify(req_obj),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+        fetch(request)
+            .then(response => {
+                let contentType = response.headers.get('Content-Type');
+                if (contentType && contentType.includes('application/json')) {
+                    return response;
+                }
+                throw new TypeError ('Datele primite nu-s JSON');
+            })
+            .then(response =>{
+                if(response.status === 200) {
+                    clear_form();
+                    redirect_on_succes();
+                }
+                else{
+                    return response.json()
+                }
+            })
+            .then( json => {
+                show_message(json.message);
+            })
+            .catch( err =>{
+                console.log(err);
+            })
+    });
+
+
+</script>
 </body>
 </html>

@@ -100,7 +100,6 @@ let announcement_schema = {
     }
 };
 
-let AnnouncementSchema = mongoose.Schema(announcement_schema);
+let AnnouncementSchema = new mongoose.Schema(announcement_schema);
 
-// exports.AnnouncementSchema = AnnouncementSchema;
 module.exports = mongoose.model('Announcement', AnnouncementSchema);
