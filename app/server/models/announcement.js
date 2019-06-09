@@ -5,7 +5,7 @@ let validator = require('validator');
 let settings = require('../settings');
 let Schema = mongoose.Schema;
 
-const default_image = settings.imgAnnouncementsPAth + 'default_ann.png';
+const default_image = settings.imgAnnouncementsPath + 'default_ann.png';
 
 let apartment_schema = Schema({
 
