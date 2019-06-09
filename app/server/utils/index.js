@@ -1,3 +1,5 @@
+let cookies = require('cookies');
+
 exports.parse = function (obj) {
     let res = null;
     try {
@@ -45,8 +47,19 @@ exports.send_success_json = function (res, message) {
     }));
 };
 
+
 exports.send_json_data = function(res, status, json_data) {
     res.writeHead(200, {'Content-Type': 'application/json'});
+    res.end(JSON.stringify( json_data ));
+};
+
+exports.set_cookie_token = function(req, res, status, json_data){
+    let cookie = new cookies(req, res);
+    cookie.set(session_token_name, json_data.token);
+
+    res.writeHead(200, {
+        'Content-Type': 'application/json',
+    });
     res.end(JSON.stringify( json_data ));
 };
 

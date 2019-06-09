@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "bcrypt": "^3.0.6",
+    "cookies": "^0.7.3",
     "ejs": "^2.6.1",
     "finalhandler": "^1.1.2",
     "jsonwebtoken": "^8.5.1",

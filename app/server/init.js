@@ -25,6 +25,7 @@ module.exports = function(){
         process.exit(0);
     });
 
+    global.session_token_name = "session_token";
 
     global.MIMEtypes = {
         '.aac': 'audio/aac',

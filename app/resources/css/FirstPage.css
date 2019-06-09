@@ -1,0 +1,262 @@
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+article {
+    padding: 0px;
+    margin: 5px;
+    box-sizing: border-box
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+section#start {
+    background-image: url("/img/christian-koch-79679-unsplash.jpg");
+    height: 100vh;
+}
+#overlay{
+    position:absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100vh;
+    width: 100%;
+}
+
+section:nth-of-type(2) {
+    background-color: rgb(248,248,248);
+    text-align: center;
+    height: auto;
+    padding-top: 5vh;
+    box-sizing: border-box;
+    padding-bottom: 5vh;
+    width: 100%;
+    padding: 5.5%;
+    display: flex;
+}
+
+section:nth-of-type(3) {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/img/luke-van-zyl-504032-unsplash.jpg");
+    height: 100vh;
+    padding: 7%;
+    box-sizing: border-box;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+}
+
+.card2 {
+    flex: 2;
+    background: rgb(240, 240, 240);
+    padding: 10px 40px;
+    text-align: center;
+    margin: 10px 10px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.card2:hover {
+    transform: scale(1.04);
+}
+
+.ptext {
+    width: 40%;
+    height: 55vh;
+    text-align: center;
+    font-size: 3vh;
+    color: black;
+    margin: auto;
+    position: center;
+    background: rgba(255, 255, 255, 0.8);
+    z-index:1;
+}
+
+.button {
+    background-color: white;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4vh 1vh;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.button-cauta {
+    background-color: black;
+    color: white;
+    border-radius: 3px;
+}
+
+.button-cauta:hover {
+    background-color: white;
+    color: black;
+}
+.button-cauta i{
+    margin-right:7px;
+}
+select {
+    padding: 5px 8px;
+    width: 30vw;
+    height: 5vh;
+    border: none;
+    margin: 1vh;
+    background: #404040;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+
+.p-promovare {
+    position: relative;
+    color: #282828;
+    margin-top: auto;
+    text-align: center;
+    font-size: 2vw;
+    letter-spacing: 6px;
+}
+
+.iconImg {
+    width: 100%;
+    margin-top: 4vh;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Flexbox styles */
+
+.carding {
+    background: white;
+    padding: 0;
+    object-fit: contain;
+    margin-bottom: 2em;
+    box-shadow: 3px 3px 8px hsla(0, 0%, 83%, 0.459);
+    flex: 400px;
+    cursor: pointer;
+}
+
+.carding a {
+    color: black;
+    text-decoration: none;
+}
+
+.carding:hover {
+    box-shadow: 3px 8px 15px hsla(0, 0%, 75%, 0.411)
+}
+
+.card-content {
+    padding: 0;
+    text-align: center;
+    font-family: "Lato", sans-serif;
+    font-size: 100%;
+}
+
+.card-header {
+    position: relative;
+    height: 80%;
+    overflow: hidden;
+    width: 33;
+    background-position: center;
+    background-blend-mode: overlay;
+    /* border-radius: 4px 4px 0 0; */
+    font-family: 'Poppins', sans-serif;     
+}
+
+.card-title {
+    /* background: rgb(0, 95, 140, 0.8); */
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+hr {
+    width: 80%;
+    margin-top: 4vh;
+    height: 2px;
+    background-color: rgb(124, 124, 124);
+}
+
+.card2 i {
+    color: #005F8C;
+}
+
+.card2-text {
+    margin-top: 10vh;
+}
+
+.card2-text h4 {
+    color:#005F8C;
+    font-family: "Roboto Condensed", sans-serif;
+    text-transform: uppercase;
+    font-size: 30px;
+    letter-spacing: 2px;
+    margin-top: -50px;
+}
+
+@media only screen and (max-width: 700px) {
+    section {
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        object-fit: contain;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+
+    .ptext {
+        width: 80%;
+        height: 40%;
+        text-align: center;
+        font-size: 2.5vw;
+        letter-spacing: 6px;
+        margin-left: 5vw;
+        margin: auto;
+        position: center;
+
+    }
+
+    select {
+        padding: 5px 8px;
+        width: 50%;
+        height: 80%;
+        border: none;
+        margin: 1vh;
+        background: #404040;
+        color: white;
+
+    }
+
+    .button {
+        background-color:#202020;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        font-size: 13px;
+        margin: 5vh 1vh;
+    }
+}

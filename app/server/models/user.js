@@ -3,7 +3,10 @@
 let mongoose    = require('mongoose');
 let validator   = require('validator');
 let bcrypt      = require('bcrypt');
+let settings    = require('../settings');
 let Schema      = mongoose.Schema;
+
+const default_picture = settings.imgUsersPath + 'profile.png';
 
 let user_schema = {
     username: {
@@ -38,6 +41,11 @@ let user_schema = {
             validator: validator.isMobilePhone,
             message: props => `${props.value} is not a valid phone number!`
         }
+    },
+    picture :{
+        type: String,
+        required: true,
+        default: default_picture
     },
     hash_password: {
         type: String,

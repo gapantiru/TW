@@ -39,7 +39,7 @@
     };
 
     let redirect_on_succes = () =>{
-        window.location.href = "/main_page";
+        window.location.href = "/";
     };
 
     let clear_message = function () {
@@ -90,6 +90,7 @@
                 headers: {
                     "Content-Type": "application/json",
                 },
+                credentials: 'include'
             });
 
         fetch(request)
