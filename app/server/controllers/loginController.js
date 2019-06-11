@@ -3,7 +3,7 @@ let mongoose        = require('mongoose');
 let User            = require('../models/user');
 let utils           = require('../utils');
 let middlewares     = require('../utils/middlewares');
-let bcrypt          = require('bcrypt');
+let bcrypt          = require('bcryptjs');
 let jwt             = require('jsonwebtoken');
 let dependencies    = require('../utils/dependencies');
 

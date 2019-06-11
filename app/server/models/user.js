@@ -2,7 +2,7 @@
 
 let mongoose    = require('mongoose');
 let validator   = require('validator');
-let bcrypt      = require('bcrypt');
+let bcrypt      = require('bcryptjs');
 let settings    = require('../settings');
 let Schema      = mongoose.Schema;
 
