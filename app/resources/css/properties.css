@@ -95,7 +95,8 @@ section h2 {
   background-position: center;
   background-blend-mode: overlay;
   object-fit: cover;
-  font-family: 'Poppins', sans-serif;     
+  font-family: 'Poppins', sans-serif;
+  height: 40vh;
 }
 
 .card-content>button {
