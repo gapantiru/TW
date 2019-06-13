@@ -4,6 +4,9 @@ let utils = require('./index');
 let url = require('url');
 let jwt = require('jsonwebtoken');
 let cookies = require('cookies');
+let formidable = require('formidable');
+let settings = require('../settings');
+let fs = require('fs');
 
 let isEmptyObject = function(obj) {
     return !Object.keys(obj).length;
@@ -25,6 +28,45 @@ exports.get_body_data = function(req, res, next){
 
         next();
     });
+
+};
+
+exports.get_form_data = function(req, res, next){
+
+    let form = new formidable.IncomingForm();
+    let upload_dir = settings.imgAnnouncementsFullPath + req.user._id;
+
+    if (!fs.existsSync(upload_dir)){
+        fs.mkdirSync(upload_dir);
+    }
+
+    form.uploadDir = upload_dir;
+    // form.uploadDir = settings.imgAnnouncementsFullPath;// + req.user._id;
+    form.keepExtensions = true;
+
+
+    form.parse(req, function(err, fields, files) {
+        if(err){
+            utils.send_error_json(res, 400, 'Invalid form!');
+            return;
+        }
+        let ann = JSON.parse(fields.announcement);
+
+        //TODO: remove dummy city
+        ann.city = 'Iasi';
+        //TODO: ASAP
+
+        let images = [];
+
+        for( let key in files){
+            let file = files[key];
+            images.push(file.path.slice("resources".length));
+        }
+        if(images.length !== 0)
+            ann.images = images;
+        req.body = ann;
+        next();
+    })
 
 };
 

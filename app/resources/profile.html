@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/myAccount.css">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+</head>
+
+<body>
+<header>
+    <div class="container">
+        <nav>
+            <input type="checkbox" id="nav" class="hidden">
+            <label for="nav" class="nav-btn">
+                <i></i>
+                <i></i>
+                <i></i>
+            </label>
+            <div class="logo">
+                <a href="/">IMO</a>
+            </div>
+            <div class="nav-wrapper">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/announcements">Properties</a></li>
+                    <li><a href="/map">Map</a></li>
+                    <li><a href="/myAccount">My Account</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/signup">Register</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+
+
+<section id="start">
+    <div id="overlay"></div>
+    <h2>User Profile</h2>
+</section>
+
+
+<section id="content">
+    <div class="left-side">
+
+        <% announcements.forEach((ann) => { %>
+
+        <article class="carding">
+            <a href="/announcementsDetail/<%= ann._id %>">
+                <div class="card-header">
+                    <img src="/img/breno-assis-517356-unsplash.jpg">
+                    <div class="card-title">
+                        <h2> <%= ann.type %> </h2>
+                    </div>
+
+                </div>
+                <div class="card-content">
+                    <h4><%= ann.title %></h4>
+                    <hr>
+                    <p> <%= ann.description %> </p>
+                    <hr>
+                </div>
+            </a>
+        </article>
+
+        <%});%>
+
+    </div>
+
+    <div class="right-side">
+        <div class="profile">
+            <img src="<%= user.picture %>">
+            <div class="profile-title">
+                <h2> <%= user.fullName %> </h2>
+            </div>
+            <hr>
+            <div class="profile-content">
+                <h4>Email: <%= user.email %> </h4>
+                <h4>Phone: <%= user.phone %> </h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+</body>
+
+</html>

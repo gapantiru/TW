@@ -2,6 +2,7 @@ body {
   margin: 0;
   width: 100%;
   height: 100%;
+  font-family: 'Poppins', sans-serif;
 }
 
 * {
@@ -37,7 +38,10 @@ section#start {
   padding: 2px 0 1px;
   font-size: 45px;
 }
-
+.left-side{
+  width:70%;
+  height: auto;
+}
 .path-prop {
   margin-bottom: 0;
   padding: 4px 0 3px;
@@ -88,10 +92,10 @@ section#start {
 
 
 section#slider {
-  background-color: white;
-  margin-top: 5vh;
+  background-color: rgb(248,248,248);
+  padding: 5.5%;
   width: 100%;
-  height: 50vh;
+  height: auto;
 }
 
 .imgslider {
@@ -110,7 +114,7 @@ form h2 {
 
 }
 
-section h2 {
+section#start h2 {
 
   color: white;
   font-family: "Roboto Condensed", sans-serif;
@@ -140,7 +144,7 @@ section h2 {
 
 /* SLIDER */
 .slider-container{
-  width:50%;
+  width:100%;
   height:100%;
   position: relative;
 }
@@ -208,18 +212,102 @@ section h2 {
   from {opacity: .4} 
   to {opacity: 1}
 }
+/* SIDES */
 
-/* OWNER INFO */
-.contact {
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-  width: 40vh;
-  background-color: grey;
-  margin-left: 10px;
+.left-side{
+  width: 60%;
+  height: auto;
 }
 
-section#details{
+.right-side{
+  width: 30%;
+  height: auto;
+  padding: 5.5%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* OWNER INFO */
+
+.profile{
+  flex: 2;
+  /* background-image: url("img/chuttersnap-362512-unsplash.jpg"); */
+  background-color: white;
+  height: max-content;
   width:100%;
-  height: 120vh;
+  box-shadow: 3px 3px 8px hsla(0, 0%, 83%, 0.459);
+}
+
+
+.profile h3,h4,.hr{
+  color:black;
+  z-index:2;
+}
+
+.right-side h1{
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 30px;
+}
+
+.right-side h2{
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  color: black;
+  font-size: 30px;
+}
+
+img{
+  max-width: 100%;
+  height: auto;
+}
+
+section#details {
+  background-color: rgb(248,248,248);
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.technical{
+  align-content: left;
+  color: black;
+  width: 30%;
+  height: auto;
+  background: white;
+  padding: 3%;
+  margin: 3%;
+  box-shadow: 3px 3px 8px hsla(0, 0%, 83%, 0.459);
+}
+
+.technical h2{
+  font-size: 20px;
+  font-family: 'Lato', sans-serif;
+}
+.technical{
+  align-content: left;
+  color: black;
+  width: 30%;
+  height: auto;
+  background: white;
+  padding: 3%;
+  margin: 3%;
+  box-shadow: 3px 3px 8px hsla(0, 0%, 83%, 0.459);
+  object-fit: contain;
+}
+
+.technical h2{
+  font-size: 20px;
+  font-family: 'Lato', sans-serif;
+}
+
+.description{
+  width: 50%;
+  background: #FAB28B;
+  padding: 3%;
+  height: auto;
+  font-size: 18px;
 }

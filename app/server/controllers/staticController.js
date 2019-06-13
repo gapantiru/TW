@@ -63,7 +63,8 @@ class staticController{
         router.get('/login', this.login_page);
 
         router.get('/css/*', this.get_static_files);
-        router.get('/img/*', this.get_static_files);
+        router.get('/img*/*', this.get_static_files);
+        router.get('/resources/imgAnnouncements/*', this.get_static_files);
         router.get('/js/*', this.get_static_files);
     }
 

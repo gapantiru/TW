@@ -33,14 +33,13 @@ class MyAccountView{
                             renderer.send(res, 'myAccount.html', items, next);
                         })
                         .catch( err => {
-
+                            next(err);
                         })
                 }
                 else{
                     next('User not found');
                 }
             })
-
     }
 
 }

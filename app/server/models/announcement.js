@@ -3,9 +3,10 @@
 let mongoose = require('mongoose');
 let validator = require('validator');
 let settings = require('../settings');
+let fs = require('fs');
 let Schema = mongoose.Schema;
 
-const default_image = settings.imgAnnouncementsPath + 'default_ann.png';
+const default_image = settings.imgAnnouncementsPath + 'default_ann.jpg';
 
 let apartment_schema = Schema({
 
@@ -49,9 +50,9 @@ let house_schema = Schema({
 
 });
 
-let ground_schema =Schema({
+let land_schema =Schema({
 
-    ground_type: {
+    land_type: {
         type: String,
         required: true
     },
@@ -113,11 +114,24 @@ let announcement_schema = {
     specific_data : {
         apartment: apartment_schema,
         house: house_schema,
-        ground: ground_schema
+        land: land_schema
     },
 };
 
 let AnnouncementSchema = new mongoose.Schema(announcement_schema,
     { collation: { locale: 'en_US', strength: 1 } });  // strength 1 -> ignore cases on query
+
+/*
+DELETE IMAGES ON ANNOUNCEMENT REMOVE
+ */
+AnnouncementSchema.pre('remove', function(next){
+   let anns = this.images;
+   for(let i = 0; i < anns.length; i++ ){
+       if(! anns[i].includes("default_ann.jpg")) {
+           fs.unlinkSync(settings.resourcesPath + anns[i]);
+       }
+   }
+   next();
+});
 
 module.exports = mongoose.model('Announcement', AnnouncementSchema);

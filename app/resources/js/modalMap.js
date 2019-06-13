@@ -1,10 +1,3 @@
-'use strict';
-let mongoose        = require('mongoose');
-let Announcement    = require('../../server/models/announcement');
-let User            = require('../models/user');
-
-
-
 function initialize() {
 
 	var mapOptions, map, marker, searchBox, city,
@@ -13,7 +6,6 @@ function initialize() {
 		latEl = document.querySelector( '.latitude' ),
 		longEl = document.querySelector( '.longitude' ),
 		element = document.getElementById( 'map-canvas' );
-	city = document.querySelector( '.reg-input-city' );
 
 	mapOptions = {
 		
@@ -68,14 +60,6 @@ function initialize() {
 
 		resultArray =  places[0].address_components;
 
-		// Get the city and set the city input value to the one selected
-		for( var i = 0; i < resultArray.length; i++ ) {
-			if ( resultArray[ i ].types[0] && 'administrative_area_level_2' === resultArray[ i ].types[0] ) {
-				citi = resultArray[ i ].long_name;
-				city.value = citi;
-			}
-		}
-
 		// Closes the previous info window if it already exists
 		if ( infoWindow ) {
 			infoWindow.close();
@@ -95,7 +79,7 @@ function initialize() {
 	 * Actualizare coordonate la marker
 	 */
 	google.maps.event.addListener( marker, "dragend", function ( event ) {
-		var lat, long, address, resultArray, citi;
+		var lat, long, address, resultArray;
 
 		console.log( 'i am dragged' );
 		lat = marker.getPosition().lat();
@@ -107,14 +91,6 @@ function initialize() {
 				address = result[0].formatted_address;
 				resultArray =  result[0].address_components;
 
-				// Get the city and set the city input value to the one selected
-				for( var i = 0; i < resultArray.length; i++ ) {
-					if ( resultArray[ i ].types[0] && 'administrative_area_level_2' === resultArray[ i ].types[0] ) {
-						citi = resultArray[ i ].long_name;
-						console.log( citi );
-						city.value = citi;
-					}
-				}
 				addressEl.value = address;
 				latEl.value = lat;
 				longEl.value = long;

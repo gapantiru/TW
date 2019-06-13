@@ -193,6 +193,7 @@ class AnnouncementAPI{
         router.get('/api/markers', this.getMarkers);
 
         router.post('/api/announcements' , middlewares.login_required_api, middlewares.get_body_data, this.addAnnouncement);
+        router.post('/api/announcementsForm' , middlewares.login_required_api, middlewares.get_form_data, this.addAnnouncement);
 
         router.delete('/api/announcements/:id', middlewares.login_required_api, this.deleteAnnouncement);
 

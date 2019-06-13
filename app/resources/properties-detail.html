@@ -24,7 +24,7 @@
           <i></i>
         </label>
         <div class="logo">
-          <a href="/">IMO</a>
+          <a href="FirstPage.html">IMO</a>
         </div>
         <div class="nav-wrapper">
           <ul>
@@ -44,11 +44,11 @@
   <section id="start">
     <div id="overlay"></div>
     <div class="titlu">
-      <h2 class="title-articol"> <%= announcement.title %>   </h2>
+      <h2 class="title-articol"> <%= announcement.title %> </h2>
       <ul class="path-prop">
         <li><a href="/">Home</a></li>
         <li><a href="/announcements">Properties</a></li>
-        <li class="active1"><%= announcement.title %></li>
+        <li class="active1"> <%= announcement.title %> </li>
       </ul>
     </div>
     <div class="property-info">
@@ -56,75 +56,150 @@
   </section>
 
   <section id="slider">
-    <div class="slider-container">
-      <div class="slides fade" onload="showSlides()">
-        <div class="number">1</div>
-        <img src="/img/christian-koch-79679-unsplash.jpg" style="width:100%">
+    <div class="left-side">
+      <div class="slider-container"  onload="showSlides()">
+        <!-- <a class="prev" onclick="plusSlides(-1)">&#10094</a> -->
+
+        <%let index=1; announcement.images.forEach(img_path => { %>
+        <div class="slides fade">
+          <div class="number"><%= index %></div>
+          <img src="<%= img_path %>" style="width:100%">
+        </div>
+        <% index++; }); %>
+
+        <a class="next" onclick="plusSlides(1)">&#10095</a>
+        <div style="text-align:center">
+          <%let ind=1; announcement.images.forEach(img_path => { %>
+          <span class="dot" onclick="currentSlide(Number('<%= ind %>'))"></span>
+          <% ind++; }); %>
+        </div>
       </div>
-      <div class="slides fade">
-        <div class="number">2</div>
-        <img src="/img/chuttersnap-348307-unsplash.jpg" style="width:100%">
-      </div>
-      <div class="slides fade">
-        <div class="number">3</div>
-        <img src="/img/chuttersnap-362512-unsplash.jpg" style="width:100%">
-      </div>
-      <div class="slides fade">
-        <div class="number">4</div>
-        <img src="/img/bottom.jpg" style="width:100%">
-      </div>
-      <a class="prev" onclick="plusSlides(-1)">&#10094</a>
-      <a class="next" onclick="plusSlides(1)">&#10095</a>
-      <div style="text-align:center">
-      <span class="dot" onclick="currentSlide(1)"></span>
-      <span class="dot" onclick="currentSlide(2)"></span>
-      <span class="dot" onclick="currentSlide(3)"></span>
-      <span class="dot" onclick="currentSlide(4)"></span>
     </div>
-    </div>
-  </section>
-  <section id="details">
-    <div class="salut">
-      <p>BUNA!</p>
+
+    <div class="right-side">
+
+      <h1>Seller's profile</h1>
+
+      <div class="profile">
+        <a href="/profile/<%= user._id %>">
+        <img src="<%= user.picture %>">
+        <div class="profile-title">
+          <h2> <%= user.fullName %> </h2>
+        </div>
+        <hr>
+        <div class="profile-content">
+          <h4>Email: <%= user.email %> </h4>
+          <h4>Phone: <%= user.phone %> </h4>
+        </div>
+        </a>
+      </div>
+
     </div>
 
   </section>
+
+  <section id="details">
+    <div class="technical">
+      <h2>Type: <%= announcement.type %> </h2>
+      <hr>
+      <h2>City: <%= announcement.city %> </h2>
+      <hr>
+      <h2>Address: <%= announcement.address %> </h2>
+      <hr>
+      <h2>Price: <%= announcement.price %> &euro;</h2>
+      <hr>
+    </div>
+
+  <% if(announcement.category === "Apartment") { %>
+    <% let specific = announcement.specific_data.apartment; %>
+    <div class="technical apartment">
+      <h2>Partitioning: <%= specific.partitioning %> </h2>
+      <hr>
+      <h2>Comfort: <%= specific.comfort %> </h2>
+      <hr>
+      <h2>Floor: <%= specific.floor %> </h2>
+      <hr>
+      <h2>Number of rooms: <%= specific.nr_of_rooms %> </h2>
+      <hr>
+      <h2>Surface: <%= specific.surface %> </h2>
+      <hr>
+    </div>
+
+  <% } %>
+
+  <% if(announcement.category === "House") { %>
+    <% let specific = announcement.specific_data.house; %>
+    <div class="technical house">
+      <h2>Land area: <%= specific.land_area %> </h2>
+      <hr>
+      <h2>Construction year: <%= specific.construction_year %> </h2>
+      <hr>
+      <h2>Surface: <%= specific.surface %> </h2>
+      <hr>
+    </div>
+
+  <% } %>
+
+  <% if(announcement.category === "Land") { %>
+    <% let specific = announcement.specific_data.land; %>
+
+    <div class="technical land">
+      <h2>Land type: <%= specific.land_type %> </h2>
+      <hr>
+      <h2>Land area: <%= specific.land_area %> </h2>
+      <hr>
+      <h2>Land classification: <%= specific.land_classification %> </h2>
+      <hr>
+    </div>
+
+  <% } %>
+
+
+    <div class="description">
+      <h3> <%= announcement.description %> </h3>
+    </div>
+  </section>
+
+  <section id="map">
+
+  </section>
+
 
 
 
 
   <script>
-      var slideIndex = 1;
-      showSlides(slideIndex);
-    
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
     function plusSlides(n) {
       showSlides(slideIndex += n);
     }
-    
+
     function currentSlide(n) {
       showSlides(slideIndex = n);
     }
-    
+
     function showSlides(n) {
-      let i;
-      let slides = document.getElementsByClassName("slides");
-      let dots = document.getElementsByClassName("dot");
+      var i;
+      var slides = document.getElementsByClassName("slides");
+      var dots = document.getElementsByClassName("dot");
       if (n > slides.length) {
         slideIndex = 1
-        } 
+      }
       if (n < 1) {
         slideIndex = slides.length
-        }
+      }
       for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none"; 
+        slides[i].style.display = "none";
       }
       for (i = 0; i < dots.length; i++) {
-          dots[i].className = dots[i].className.replace(" active", "");
+        dots[i].className = dots[i].className.replace(" active", "");
       }
-      slides[slideIndex-1].style.display = "block"; 
-      dots[slideIndex-1].className += " active";
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
     }
-      </script>
+  </script>
 </body>
 
 </html>

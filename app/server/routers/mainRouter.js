@@ -7,6 +7,7 @@ let AnnouncementPage        = require('../controllers/announcements');
 let AnnouncementDetailPage  = require('../controllers/announcementsDetail');
 let FirstPage               = require('../controllers/firstPage');
 let myAccount               = require('../controllers/myAccount');
+let Profile                 = require('../controllers/profile');
 
 let middlewares             = require('../utils/middlewares');
 
@@ -36,6 +37,8 @@ LoginHandler.init_routes(mainRouter);
 INIT TEMPLATES ROUTES (FROM VIEWS)
  */
 myAccount.init_routes(mainRouter);
+Profile.init_routes(mainRouter);
+
 AnnouncementPage.init_routes(mainRouter);
 AnnouncementDetailPage.init_routes(mainRouter);
 FirstPage.init_routes(mainRouter);

@@ -21,5 +21,7 @@ exports.mongodb_uri = 'mongodb://127.0.0.1:27017/PERF';
 
 exports.resourcesPath = './resources/';
 exports.templatesPath = './resources/';
-exports.imgUsersPath = './resources/imgUsers/';
-exports.imgAnnouncementsPath = './resources/imgAnnouncements/';
+exports.imgUsersPath = '/imgUsers/';
+exports.imgUsersFullPath = './resources/imgUsers/';
+exports.imgAnnouncementsFullPath = './resources/imgAnnouncements/';
+exports.imgAnnouncementsPath = '/imgAnnouncements/';

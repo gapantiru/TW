@@ -4,111 +4,426 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="css/myAccount.css">
-  <link rel="stylesheet" type="text/css" href="test.css"> 
+  <link rel="stylesheet" type="text/css" href="css/navbar.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+<!--    <meta name="viewport" content="width=device-wi    dth, initial-scale=1">-->
+    <link rel="stylesheet" type="text/css" href="/css/modal.css">
 
 </head>
 
 <body>
-  <section>
-    <h2>My profile</h2>
+  <header>
+    <div class="container">
+      <nav>
+        <input type="checkbox" id="nav" class="hidden">
+        <label for="nav" class="nav-btn">
+          <i></i>
+          <i></i>
+          <i></i>
+        </label>
+        <div class="logo">
+          <a href="/">IMO</a>
+        </div>
+        <div class="nav-wrapper">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/announcements">Properties</a></li>
+            <li><a href="/map">Map</a></li>
+            <li><a href="/myAccount">My Account</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Register</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+   
+  <section id="start">
+      <div id="overlay"></div>
+    <h2>My account</h2>
   </section>
 
-  <div class="content">
-    <div class="left-side">
-      <article class="carding">
+  <button id="myBtn">Add new announcement</button>
 
+
+<section id="content">
+
+<div class="left-side">
+
+    <% announcements.forEach((ann) => { %>
+
+    <article class="carding">
+        <a href="/announcementsDetail/<%= ann._id %>">
         <div class="card-header">
-          <img src="thumbnail2.jpg" alt="thumbnail2">
-
+            <img src="img/breno-assis-517356-unsplash.jpg">
           <div class="card-title">
-            <h2>for sale</h2>
+            <h2> <%= ann.type %> </h2>
           </div>
 
         </div>
-      </article>
-      <article class="carding">
-
-        <div class="card-header">
-          <img src="thumbnail2.jpg" alt="thumbnail2">
-
-          <div class="card-title">
-            <h2>sold</h2>
-          </div>
-
+        <div class="card-content">
+          <h4><%= ann.title %></h4>
+          <hr>
+          <p class="ann"> <%= ann.description %> </p>
+            <hr>
+          <button class="button button-cauta" onclick="delete_ann('<%= ann._id %>')">Delete</button>
         </div>
+        </a>
       </article>
 
-      </article>
-      <article class="carding">
-
-        <div class="card-header">
-          <img src="thumbnail2.jpg" alt="thumbnail2">
-
-          <div class="card-title">
-            <h2>for rent</h2>
-          </div>
-
-        </div>
-      </article>
-      <article class="carding">
-
-        <div class="card-header">
-          <img src="thumbnail2.jpg" alt="thumbnail2">
-
-          <div class="card-title">
-            <h2>for rent</h2>
-          </div>
-
-        </div>
-      </article>
-      <article class="carding">
-
-        <div class="card-header">
-          <img src="thumbnail2.jpg" alt="thumbnail2">
-
-          <div class="card-title">
-            <h2>for rent</h2>
-          </div>
-
-        </div>
-      </article>
-      <article class="carding">
-
-        <div class="card-header">
-          <img src="thumbnail2.jpg" alt="thumbnail2">
-
-          <div class="card-title">
-            <h2>for rent</h2>
-          </div>
-
-        </div>
-      </article>
-
-      </div>
-      <div class="right-side">
-          <div class="cardulet">
-              <div class="cardulet-header">
-                <img src="profile.png" alt = "profile"/>
-              </div>
-              <div class="cardulet-content">
-                <h3>John Doe</h3>
-                <h4>Email: </h4>
-                <p>Age: </p>
-                <p>Workplace: </p>
-                <p>Member since: </p>
-              </div>
-              <div class="cardulet-footer">
-              </div>
-            </div>
-
-      </div>
-      </div>
+    <%});%>
       
+    </div> 
 
+<div class="right-side">
+  <div class="profile">
+        <img src="<%= user.picture %>">
+        <div class="profile-title">
+          <h2> <%= user.fullName %> </h2>
+      </div>
+      <hr>
+      <div class="profile-content">
+        <h4>Email: <%= user.email %> </h4>
+        <h4>Phone: <%= user.phone %> </h4>
+      </div>
+  </div>
+</div>
+    </section>
+
+<script>
+
+    let redirect_on_succes = () =>{
+        window.location.reload();
+    };
+
+    let confirm_delete = function(){
+        let r = confirm("Are you sure?");
+        return r;
+    };
+
+
+    let delete_ann= function(ann_id){
+
+        if(!(confirm_delete()))
+            return;
+
+        const URL = '/api/announcements/' + ann_id;
+        const method = 'DELETE';
+
+        let request = new Request(URL,
+            {
+                method: method,
+                credentials: 'include'
+            });
+        fetch(request)
+            .then(response => {
+                let contentType = response.headers.get('Content-Type');
+                if (contentType && contentType.includes('application/json')) {
+                    return response;
+                }
+                throw new TypeError ('Datele primite nu-s JSON');
+            })
+            .then(async (response) => {
+
+                if (response.status === 200) {
+                    redirect_on_succes();
+                }
+                else{
+                    const obj = await response.json();
+                    alert(obj.message);
+                }
+            })
+            .catch( err => {
+                window.alert("An error occured!");
+                console.log(err);
+            })
+
+    }
+
+
+</script>
+
+
+
+
+<!--  MODAL-->
+
+  <div id="myModal" class="modal">
+
+
+      <div class="modal-content">
+          <span class="close">&times;</span>
+          <h1>Add your property</h1>
+
+
+          <form method="post" enctype="multipart/form-data" class="modalForm" id="addform">
+
+              <div id="modalDiv">
+                  Title: <input id="title" type="text"> <br>
+                  Type:<select id="chooseFields">
+                  <option value="first" disabled selected>Choose type:</option>
+                  <option value="appartment" name="appartment">Appartment</option>
+                  <option value="house" name="house">House</option>
+                  <option value="land" name="land">Land</option>
+
+              </select>
+                  Selling type:<select id="selling">
+                  <option value="Sell" name="Sell">Selling</option>
+                  <option value="Rent" name="Rent">Renting</option>
+              </select> <br>
+                  Price(&euro;): <input id="price" type="number"><br>
+
+                  <div id="appartmentDiv">
+                      Partitioning:<select id="partitioning">
+                      <option value="detached" name="detached">Detached</option>
+                      <option value="semiDetached" name="semiDetached">Semi Detached</option>
+                  </select> <br>
+                      Comfort:<select id="comfort">
+                      <option value="1" name="c1">1</option>
+                      <option value="2" name="c2">2</option>
+                      <option value="3" name="c3">3</option>
+                      <option value="4" name="c4">4</option>
+                      <option value="5" name="c5">5</option>
+                  </select> <br>
+                      Floor:<select id="floor">
+                      <option value="0" name="f0">0</option>
+                      <option value="1" name="f1">1</option>
+                      <option value="2" name="f2">2</option>
+                      <option value="3" name="f3">3</option>
+                      <option value="4" name="f4">4</option>
+                      <option value="5" name="f5">5</option>
+                      <option value="6" name="f6">6</option>
+                      <option value="7" name="f7">7</option>
+                      <option value="8" name="f8">8</option>
+                      <option value="9" name="f9">9</option>
+                      <option value="10" name="f10">10</option>
+                  </select> <br>
+                      Number of rooms:<select id="nr_of_rooms">
+                      <option value="1" name="r1">1</option>
+                      <option value="2" name="r2">2</option>
+                      <option value="3" name="r3">3</option>
+                      <option value="4" name="r4">4</option>
+                      <option value="5" name="r5">5</option>
+                  </select> <br>
+                      Surface(m<sup>2</sup>): <input type="number" id="surfaceAppartment" value="surfaceAppartment"
+                                                     name="surfaceAppartment" id="surfaceAppartment">
+
+                  </div>
+
+
+                  <div id="houseDiv">
+                      Land Area(m<sup>2</sup>): <input type="number" id="land_area" value="landArea" name="landArea">
+                      Surface(m<sup>2</sup>): <input type="number" id="surfaceHouse" value="surfaceHouse"
+                                                     name="surfaceHouse">
+                      Construction year: <input type="number" id="year" min="1925" max="2019" value="year" name="year">
+                  </div>
+
+                  <div id="landDiv">
+
+                      Land Clasification : <select id="land_classification">
+                      <option value="incorporated" name="incorporated">Incorporated
+                      </option>
+                      <option value="unincorporated" name="unincorporated">Unincorporated area</option>
+
+
+                  </select>
+
+                      Ground Area(m<sup>2</sup>) : <input type="number" id="ground_area" value="surfaceGround"
+                                                          name="surfaceGround">
+
+                      Ground Type : <select id="ground_type">
+                      <option value="agriculturalLand" name="agriculturalLand">Agricultural Land
+                      </option>
+                      <option value="constructionLand" name="constructionLand">Construction Land</option>
+                      <option disabled value="TEODORA" name="TEODORA">Casa de veci = Locul unde mori (Teodora 2k19)
+                      </option>
+
+                  </select> <br>
+
+
+                  </div>
+                  <label id="address" for="">Address: <input id="map-search" class="controls" type="text"
+                                                             placeholder="Search Box" size="104"></label><br>
+                  <label for="">Lat: <input type="text" class="latitude" id="latitude"></label>
+                  <label for="">Long: <input type="text" class="longitude" id="longitude"></label>
+
+                  <div id="map-canvas"></div>
+
+
+                  <script>
+                      var type;
+                      document.getElementById("houseDiv").style.display = "none";
+                      document.getElementById("appartmentDiv").style.display = "none";
+                      document.getElementById("landDiv").style.display = "none";
+
+                      document.getElementById("chooseFields").addEventListener("change", function (e) {
+
+                          var selectedField = this.options[this.selectedIndex].value;
+                          document.getElementById("houseDiv").style.display = "none";
+                          document.getElementById("appartmentDiv").style.display = "none";
+                          document.getElementById("landDiv").style.display = "none";
+                          if (selectedField === "house") {
+                              document.getElementById("houseDiv").style.display = "block";
+                              type = "House";
+                          }
+                          if (selectedField === "appartment") {
+                              document.getElementById("appartmentDiv").style.display = "block";
+                              type = "Apartment";
+                          }
+                          if (selectedField === "land") {
+                              document.getElementById("landDiv").style.display = "block";
+                              type = "Land"
+                          }
+                      });
+
+                      document.getElementById("addform").addEventListener("submit", function (e) {
+                          e.preventDefault();
+                          alert("tata l lui zbant");
+
+                          var formData = new FormData();
+                          var data = {};
+
+                          var title = document.getElementById("title").value;
+                          var description = document.getElementById("description").value;
+                          var price = document.getElementById("price").value;
+                          var address = document.getElementById("map-search").value;
+                          var lat = document.getElementById("latitude").value;
+                          var long = document.getElementById("longitude").value;
+                          var sell = document.getElementById("selling").value;
+
+                          data.type = sell;
+                          data.title = title;
+                          data.description = description;
+                          data.price = price;
+                          data.address = address;
+                          data.coordinates = {
+                              latitude: lat,
+                              longitude: long
+                          };
+                          var acceptedFiles = document.querySelector('.inputImg').files;
+                          let index = 0;
+                          for (const file of acceptedFiles) {
+                              // formData.append('files[' + index++ +']', file, file.name);
+                              formData.append('files' + index++, file, file.name);
+
+                          }
+                          if (type == "House") {
+                              var land_area = document.getElementById("land_area").value;
+                              var construction_year = document.getElementById("year").value;
+                              var surface = document.getElementById("surfaceHouse").value;
+
+                              data.category = "House";
+                              data.specific_data = {
+                                  house: {
+                                      land_area: land_area,
+                                      construction_year: construction_year,
+                                      surface: surface
+                                  }
+                              }
+                          }
+
+                          if (type == "Apartment") {
+                              var partitioning = document.getElementById("partitioning").value;
+                              var comfort = document.getElementById("comfort").value;
+                              var floor = document.getElementById("floor").value;
+                              var surface = document.getElementById("surfaceAppartment").value;
+                              var nr_of_rooms = document.getElementById("nr_of_rooms").value;
+
+                              data.category = "Apartment";
+                              data.specific_data = {
+                                  apartment: {
+                                      partitioning: partitioning,
+                                      comfort: comfort,
+                                      floor: floor,
+                                      surface: surface,
+                                      nr_of_rooms: nr_of_rooms
+                                  }
+                              }
+                          }
+
+                          if (type == "Land") {
+                              var ground_type = document.getElementById("ground_type").value;
+                              var ground_area = document.getElementById("ground_area").value;
+                              var land_classification = document.getElementById("land_classification").value;
+                              data.category = "Land";
+
+                              data.specific_data = {
+                                  land: {
+                                      land_type : ground_type,
+                                      land_area : ground_area,
+                                      land_classification: land_classification
+                                  }
+                              }
+
+                          }
+                          const URLPOST = '/api/announcementsForm';
+
+                          formData.append("announcement", JSON.stringify(data));
+                          // for ( var key in data ) {
+                          //     formData.append(key, JSON.stringify(data[key]));
+                          // }
+                          fetch(URLPOST, {
+
+                              method: 'POST',
+                              mode: 'no-cors',
+                              credentials: 'include',
+                              body: formData
+
+                          })
+                              .then(response => {
+                                  return response.json();
+                              })
+                              .then(resp => {
+                                  console.log("OK");
+                              })
+                              .catch(err => {
+                                  console.log(err);
+                              });
+                      });
+                  </script>
+
+
+
+                  Description:
+                  <br>
+                  <textarea id="description" rows="5" cols="80" name="comment" form="usrform">
+    Enter description here ...</textarea>
+
+              </div>
+
+              <div>
+                  <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
+                  <input class='inputImg' type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png"
+                         multiple>
+              </div>
+              <div class="preview">
+                  <p>No files currently selected for upload</p>
+              </div>
+              <div>
+                  <button>Submit</button>
+              </div>
+
+              <script src="/js/modalMap.js"></script>
+              <script async defer
+                      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjEifYjBELDhmPVteAxzU2bsVmYOFiYPY&libraries=places&callback=initialize">
+              </script>
+
+              <script src="/js/image.js"></script>
+          </form>
+
+      </div>
+
+  </div>
+
+  <script src="/js/modal.js"></script>
+  <script src="/js/image.js"></script>
 
 </body>
 
