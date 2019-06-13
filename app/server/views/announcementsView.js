@@ -21,7 +21,9 @@ class AnnouncementsView{
         /*
         LOAD ALL ANNOUNCEMENTS
          */
-        let items = {announcements:[]};
+        let items = {
+            cities: [],
+            announcements:[]};
 
         Announcements.find({})
             .sort(default_sort)
@@ -31,13 +33,27 @@ class AnnouncementsView{
                 announcements.forEach( ann => {
                     items.announcements.push(ann);
                 });
-                renderer.send(res, 'properties.html', items, next);
+
+                Announcements.distinct('city')
+                    .then( cities => {
+                        if(cities){
+                            cities.forEach( city =>{
+                                items.cities.push(city);
+                            })
+                        }
+                        renderer.send(res, 'properties.html', items, next);
+                    })
+                    .catch( err => {
+                        next("Internal error!");
+                    });
+
+                // renderer.send(res, 'properties.html', items, next);
 
             })
 
             .catch( err => {
                 //TODO: send to custom err page
-                next(err);
+                next("Internal error!");
             })
 
     }
@@ -48,11 +64,25 @@ class AnnouncementsView{
         /*
         LOAD ANNOUNCEMENTS MATCHING FILTER
          */
-        let items = {announcements:[]};
+        let items = {
+            cities:[],
+            announcements:[]};
 
-        let filters = req.query;
+        let query = req.query;
+        let filters = {};
 
-        Announcements.find(filters)
+        for (let key in query){
+            if(key.includes("apartment") || key.includes("house") || key.includes("land")){
+                if(query[key] !== "")
+                    filters['specific_data.' + key] = query[key];
+            }else{
+                filters[key] = query[key];
+            }
+        }
+
+        // if
+
+        Announcements.find( filters )
             .sort(default_sort)
             .then( announcements =>{
                 if(announcements){
@@ -60,12 +90,23 @@ class AnnouncementsView{
                         items.announcements.push(ann);
                     });
                 }
-                renderer.send(res, 'properties.html', items, next);
-
+                Announcements.distinct('city')
+                    .then( cities => {
+                        if(cities){
+                            cities.forEach( city =>{
+                                items.cities.push(city);
+                            })
+                        }
+                        renderer.send(res, 'properties.html', items, next);
+                    })
+                    .catch( err => {
+                        next("Internal error!");
+                    });
+                // renderer.send(res, 'properties.html', items, next);
             })
 
             .catch( err => {
-                next(err);
+                next('Internal error!');
             })
 
     }
