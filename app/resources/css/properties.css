@@ -18,17 +18,17 @@ section {
 article {
   padding: 0px;
   margin: 5px;
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 section#start {
   background-image: url("/img/christian-koch-79679-unsplash.jpg");
-  height: 100vh;
+  height: 120vh;
 }
 #overlay{
   position:absolute;
   background-color: rgba(0, 0, 0, 0.5);
-  height: 100vh;
+  height: 120vh;
   width: 100%;
 }
 
@@ -81,7 +81,6 @@ section h2 {
   font-size: 15px;
   align-items: center;
   object-fit: contain;
-
 }
 
 .card-content h4 {
@@ -90,7 +89,7 @@ section h2 {
 
 .card-header {
   position: relative;
-  height: 80%;
+  height: 20vw;
   overflow: hidden;
   width: 33;
   background-position: center;
@@ -107,7 +106,7 @@ section h2 {
 
  .card-title {
 
-  background: rgb(0,0,0, 0.6);
+  background: rgba(0,0,0,0.6);
   font-family: "Lato", sans-serif;
   text-transform: uppercase;
   font-size: 15px;
@@ -117,13 +116,14 @@ section h2 {
   display: flex;
   justify-content: space-around;
   height: 8vh;
+   margin-bottom: 5px;
 }
 .card-title h2{
   font-size:25px;
 }
-img{
+.card-header img{
   max-width: 100%;
-  height: auto;
+ display:block;
 }
 
 select {
@@ -139,16 +139,30 @@ select {
   z-index:1;
 }
 
+input {
+  padding: 5px 8px;
+  width: 30vw;
+  height: 5vh;
+  border: none;
+  margin-left: -13px;
+  background: #404040;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  z-index:1;
+
+}
+
 section#start .ptext {
   background-color: rgba(255, 255, 255, 0.8);
   padding: 15px;
-  height: 80vh;
+  height: auto;
   width: 50%;
   margin: auto;
+  margin-top:40px;
   text-align: center;
   font-size: 2vw;
   letter-spacing: 6px;
-  margin:auto;
+ 
   position:center;
   object-fit: contain;
   z-index: 1;
@@ -184,13 +198,12 @@ section#start .ptext {
 .carding {
   background: white;
   padding: 0;
-  object-fit: contain;
   margin-bottom: 3em;
   box-shadow: 3px 3px 8px hsla(0, 0%, 83%, 0.459);
   flex: 400px;
   cursor: pointer;
-  height: max-content;
   overflow: hidden;
+  object-fit: contain;
 }
 
 .carding a {
@@ -223,27 +236,4 @@ section#start .ptext {
   position: relative;
   box-sizing: border-box;
   align-content: center;
-}
-
-.inline-form {
-  width: 55%;
-  object-fit: contain;
-  display: flex;
-  flex-flow: column;
-  flex-wrap: wrap;
-  align-items: center;
-  text-align: center;
-}
-
-.inline-form select {
-  flex: 1;
-  background: #4CAF50;
-  font-family: "Roboto Condensed", sans-serif;
-  width: 40%;
-
-}
-
-form p {
-  font-family: "Roboto Condensed", sans-serif;
-  text-transform: uppercase;
 }

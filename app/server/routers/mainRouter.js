@@ -8,6 +8,7 @@ let AnnouncementDetailPage  = require('../controllers/announcementsDetail');
 let FirstPage               = require('../controllers/firstPage');
 let myAccount               = require('../controllers/myAccount');
 let Profile                 = require('../controllers/profile');
+let Map                     = require('../controllers/map');
 
 let middlewares             = require('../utils/middlewares');
 
@@ -42,6 +43,7 @@ Profile.init_routes(mainRouter);
 AnnouncementPage.init_routes(mainRouter);
 AnnouncementDetailPage.init_routes(mainRouter);
 FirstPage.init_routes(mainRouter);
+Map.init_routes(mainRouter);
 
 
 /*

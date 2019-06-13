@@ -48,10 +48,12 @@
   <section id="start">
       <div id="overlay"></div>
     <h2>My account</h2>
+
   </section>
 
-  <button id="myBtn">Add new announcement</button>
-
+<section id="butonas">
+  <button id="myBtn">+ Add new announcement</button><br>
+</section>
 
 <section id="content">
 
@@ -169,7 +171,7 @@
                   Title: <input id="title" type="text"> <br>
                   Type:<select id="chooseFields">
                   <option value="first" disabled selected>Choose type:</option>
-                  <option value="appartment" name="appartment">Appartment</option>
+                  <option value="apartment" name="apartment">Apartment</option>
                   <option value="house" name="house">House</option>
                   <option value="land" name="land">Land</option>
 
@@ -177,8 +179,8 @@
                   Selling type:<select id="selling">
                   <option value="Sell" name="Sell">Selling</option>
                   <option value="Rent" name="Rent">Renting</option>
-              </select> <br>
-                  Price(&euro;): <input id="price" type="number"><br>
+              </select> <br><br>
+                  Price(&euro;): <input id="price" type="number"><br><br>
 
                   <div id="appartmentDiv">
                       Partitioning:<select id="partitioning">
@@ -213,19 +215,19 @@
                       <option value="5" name="r5">5</option>
                   </select> <br>
                       Surface(m<sup>2</sup>): <input type="number" id="surfaceAppartment" value="surfaceAppartment"
-                                                     name="surfaceAppartment" id="surfaceAppartment">
+                                                     name="surfaceAppartment" id="surfaceAppartment"><br><br>
 
                   </div>
 
 
                   <div id="houseDiv">
-                      Land Area(m<sup>2</sup>): <input type="number" id="land_area" value="landArea" name="landArea">
+                      Land Area(m<sup>2</sup>): <input type="number" id="land_area" value="landArea" name="landArea"><br>
                       Surface(m<sup>2</sup>): <input type="number" id="surfaceHouse" value="surfaceHouse"
-                                                     name="surfaceHouse">
-                      Construction year: <input type="number" id="year" min="1925" max="2019" value="year" name="year">
+                                                     name="surfaceHouse"><br>
+                      Construction year: <input type="number" id="year" min="1925" max="2019" value="year" name="year"><br><br>
                   </div>
 
-                  <div id="landDiv">
+                  <div id="landDiv"><br>
 
                       Land Clasification : <select id="land_classification">
                       <option value="incorporated" name="incorporated">Incorporated
@@ -236,7 +238,7 @@
                   </select>
 
                       Ground Area(m<sup>2</sup>) : <input type="number" id="ground_area" value="surfaceGround"
-                                                          name="surfaceGround">
+                                                          name="surfaceGround"><br>
 
                       Ground Type : <select id="ground_type">
                       <option value="agriculturalLand" name="agriculturalLand">Agricultural Land
@@ -245,12 +247,12 @@
                       <option disabled value="TEODORA" name="TEODORA">Casa de veci = Locul unde mori (Teodora 2k19)
                       </option>
 
-                  </select> <br>
+                  </select> <br><br>
 
 
                   </div>
                   <label id="address" for="">Address: <input id="map-search" class="controls" type="text"
-                                                             placeholder="Search Box" size="104"></label><br>
+                                                             placeholder="Search Box" size="104"></label><br><br>
                   <label for="">Lat: <input type="text" class="latitude" id="latitude"></label>
                   <label for="">Long: <input type="text" class="longitude" id="longitude"></label>
 
@@ -273,7 +275,7 @@
                               document.getElementById("houseDiv").style.display = "block";
                               type = "House";
                           }
-                          if (selectedField === "appartment") {
+                          if (selectedField === "apartment") {
                               document.getElementById("appartmentDiv").style.display = "block";
                               type = "Apartment";
                           }
@@ -285,7 +287,6 @@
 
                       document.getElementById("addform").addEventListener("submit", function (e) {
                           e.preventDefault();
-                          alert("tata l lui zbant");
 
                           var formData = new FormData();
                           var data = {};
@@ -314,7 +315,7 @@
                               formData.append('files' + index++, file, file.name);
 
                           }
-                          if (type == "House") {
+                          if (type === "House") {
                               var land_area = document.getElementById("land_area").value;
                               var construction_year = document.getElementById("year").value;
                               var surface = document.getElementById("surfaceHouse").value;
@@ -329,7 +330,7 @@
                               }
                           }
 
-                          if (type == "Apartment") {
+                          if (type === "Apartment") {
                               var partitioning = document.getElementById("partitioning").value;
                               var comfort = document.getElementById("comfort").value;
                               var floor = document.getElementById("floor").value;
@@ -348,7 +349,7 @@
                               }
                           }
 
-                          if (type == "Land") {
+                          if (type === "Land") {
                               var ground_type = document.getElementById("ground_type").value;
                               var ground_area = document.getElementById("ground_area").value;
                               var land_classification = document.getElementById("land_classification").value;
@@ -366,9 +367,7 @@
                           const URLPOST = '/api/announcementsForm';
 
                           formData.append("announcement", JSON.stringify(data));
-                          // for ( var key in data ) {
-                          //     formData.append(key, JSON.stringify(data[key]));
-                          // }
+
                           fetch(URLPOST, {
 
                               method: 'POST',
@@ -378,10 +377,12 @@
 
                           })
                               .then(response => {
-                                  return response.json();
-                              })
-                              .then(resp => {
-                                  console.log("OK");
+                                  if(response.status === 200){
+                                      window.alert("Announcement Created!");
+                                  }
+                                  else {
+                                      window.alert("Failed Creating Announcement!");
+                                  }
                               })
                               .catch(err => {
                                   console.log(err);
@@ -393,7 +394,7 @@
 
                   Description:
                   <br>
-                  <textarea id="description" rows="5" cols="80" name="comment" form="usrform">
+                  <textarea id="description" rows="5" cols="65" name="comment" form="usrform">
     Enter description here ...</textarea>
 
               </div>

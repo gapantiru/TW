@@ -89,12 +89,13 @@ section#content {
 
 .card-header {
   position: relative;
-  height: 30%;
+  height: 40vh;
   overflow: hidden;
   width: 33;
   background-position: center;
   background-blend-mode: overlay;
   object-fit: cover;
+
   font-family: 'Poppins', sans-serif;     
 }
 
@@ -114,6 +115,7 @@ section#content {
   width: 100%;
   display: flex;
   justify-content: space-around;
+   margin-bottom: 14px;
   height: 8vh;
 }
 .card-title h2{
@@ -122,7 +124,7 @@ section#content {
 }
 img{
   max-width: 100%;
-  height: auto;
+  display:block;
 }
 
 select {
@@ -173,8 +175,8 @@ select {
   box-shadow: 3px 3px 8px hsla(0, 0%, 83%, 0.459);
   flex: 400px;
   cursor: pointer;
-  height: max-content;
-  overflow: hidden;
+  height: 80vh;
+
 }
 
 .carding a {
@@ -250,4 +252,25 @@ form p {
 .profile-title{
   font-family: 'Poppins', sans-serif;
   text-transform: uppercase;
+}
+
+#myBtn{
+  height: 50px;
+  width: 200px;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  background: black;
+  color: white;
+  border:none;
+}
+
+#myBtn:hover{
+  color:darksalmon;
+}
+
+#butonas{
+  background: rgb(248,248,248);
+  padding-top:5%;
+  padding-left:10%;
+  margin-bottom: 0;
 }

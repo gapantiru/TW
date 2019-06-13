@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="/css/properties-detail.css">
   <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
@@ -24,7 +25,7 @@
           <i></i>
         </label>
         <div class="logo">
-          <a href="FirstPage.html">IMO</a>
+          <a href="/">IMO</a>
         </div>
         <div class="nav-wrapper">
           <ul>
@@ -162,6 +163,53 @@
 
   <section id="map">
 
+    <div id='info'></div>
+
+    <div id="map-canvas"></div>
+
+    <script>
+      function initialize() {
+
+        const URLMARKER = 'http://localhost:4000/api/announcements/'+"<%= announcement._id %>";
+        var markere;
+        fetch(URLMARKER)
+
+                .then(response => response.json())
+                .then(resp => {
+                  console.log(resp);
+                  element = document.getElementById( 'map-canvas' );
+                  latEl = resp.coordinates.latitude;
+                  longEl = resp.coordinates.longitude;
+                  bounds = new google.maps.LatLngBounds();
+
+                  mapOptions = {
+
+                    zoom: 15 ,
+                    center: new google.maps.LatLng( latEl, longEl ),
+                    disableDefaultUI: false,
+                    scrollWheel: true,
+                    draggable: true,
+
+
+                  };
+                  map = new google.maps.Map( element, mapOptions );
+
+
+                  marker = new google.maps.Marker({
+                    position: mapOptions.center,
+                    map: map,
+                    //draggable: true
+                  });
+
+
+                });
+      }
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjEifYjBELDhmPVteAxzU2bsVmYOFiYPY&libraries=places&callback=initialize">
+    </script>
+
+
   </section>
 
 
@@ -200,6 +248,9 @@
       dots[slideIndex - 1].className += " active";
     }
   </script>
+
+
+
 </body>
 
 </html>

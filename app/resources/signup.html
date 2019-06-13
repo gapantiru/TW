@@ -22,6 +22,10 @@
         <input id="email" type="email" placeholder="Email" required>
     </div>
     <div class="textbox">
+        <i class="fas fa-envelope"></i>
+        <input id="phone" type="text" placeholder="Phone" required>
+    </div>
+    <div class="textbox">
         <i class="fas fa-lock"></i>
         <input id="password" type="password" placeholder="Password" required>
     </div>
@@ -76,8 +80,9 @@
         let first_name = document.getElementById("first_name");
         let last_name = document.getElementById("last_name");
         let password = document.getElementById("password");
+        let phone = document.getElementById("phone");
 
-        if (email === undefined || password === undefined || first_name === undefined || last_name === undefined) {
+        if (email === undefined || password === undefined || first_name === undefined || last_name === undefined || phone === undefined) {
             // show_error("Something went wrong. Reload the page.");
             return;
         }
@@ -88,7 +93,8 @@
             "name": {
                 "first": first_name.value,
                 "last": last_name.value
-            }
+            },
+            phone: phone.value
         };
 
         let request = new Request(URL,

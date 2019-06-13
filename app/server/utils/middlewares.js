@@ -52,9 +52,8 @@ exports.get_form_data = function(req, res, next){
         }
         let ann = JSON.parse(fields.announcement);
 
-        //TODO: remove dummy city
-        ann.city = 'Iasi';
-        //TODO: ASAP
+        let allDetails = ann.address.split(",");
+        ann.city = allDetails[allDetails.length-2];
 
         let images = [];
 

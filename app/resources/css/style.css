@@ -5,14 +5,16 @@ html, body, #map-canvas {
 }
 
 #map-canvas {
-	height: 75%;
-	width: 75%;
+	height: 90%;
+	width: 90%;
 }
 
-label {
+#mapz1,#mapz2,#mapz3 {
 	padding: 20px 10px;
 	display: inline-block;
-	font-size: 1.5em;
+	font-size: 1em;
+	position: center;
+	margin:auto;
 }
 
 input {

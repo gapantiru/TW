@@ -9,10 +9,6 @@ let Schema      = mongoose.Schema;
 const default_picture = settings.imgUsersPath + 'profile.png';
 
 let user_schema = {
-    username: {
-        type: String,
-        unique: [true, "username must be unique!"]
-    },
     name: {
         first: {
             type: String,

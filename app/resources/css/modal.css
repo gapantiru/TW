@@ -6,7 +6,7 @@
   left: 0;
   top: 0;
   width: 100%;
-  height: 80%;
+  height: 100%;
   overflow: auto;
   font-family: 'Lato', sans-serif;
   color: white;
@@ -25,7 +25,7 @@
 
 .modal-content {
   /* background-color: rgba(255,255,255,0.8); */
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   margin: auto;
   padding: 20px;
   width: 40%;
@@ -37,7 +37,7 @@
   font-family: 'Poppins', sans-serif;
   text-transform: uppercase;
   letter-spacing: 6px;
-  font-size: 4vh;
+  font-size: 5vh;
   position: center;
   text-align: center;
 }
@@ -78,7 +78,7 @@ select {
 
 .modalForm li,
 div>p {
-  background: rgba(255, 205, 185, 0.6);
+  background: rgba(255, 255, 255, 0.6);
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
@@ -104,15 +104,15 @@ div>p {
   height: 50px;
   margin-top: 20px;
   margin-bottom: 20px;
-  background: #FAB28B;
+  background: white;
   border: none;
-  color: white;
+  color:black;
 }
 
 
 .modalForm label:hover,
 .modalForm button:hover {
-  color: white;
+  color: black;
 }
 
 .modalForm label:active,
@@ -140,4 +140,25 @@ input {
 
 input#title {
   width: 100%;
+}
+
+#land_area, #year{
+  width:30%;
+}
+#surfaceHouse{
+  width: 30%;
+}
+option, select{
+  background: white;
+  height:auto;
+}
+input{
+  height: 30px;
+}
+select{
+  width:100%;
+  margin-left: -1px;
+}
+p{
+  font-size: 15px;
 }

@@ -39,88 +39,208 @@
       </nav>
     </div>
   </header>
-  
-  <section id="start">
-      <div id="overlay"></div>
-    <div class="ptext">
-        <div class="border">
-          <form class="form">
-            <h2>Looking for something?</h2>
 
-            <select name="city">
-              <option value="" selected disabled hidden>City</option>
-              <option value="Iasi">Iasi</option>
-              <option value="Bucuresti">Bucuresti</option>
-              <option value="Cluj">Cluj</option>
-              <option value="Constanta">Constanta</option>
-            </select>
-            <br>
-            <select name="category">
-              <option value="" selected disabled hidden>House Type</option>
-              <option value="Apartment">Apartment</option>
-              <option value="House">House</option>
-              <option value="Land">Land</option>
-            </select>
-            <br>
-            <select name="type">
-              <option value="" selected disabled hidden>Selling Type</option>
-              <option value="Sell">Sell</option>
-              <option value="Rent">Rent</option>
-            </select>
-            <br>
-            <select name="polution">
-              <option value="" selected disabled hidden>Pollution</option>
-            </select>
-            <br>
-            <select name="traffic">
-              <option value="" selected disabled hidden>Traffic</option>
-            </select>
-            <br>
-            <select name="anualSpent">
-              <option value="" selected disabled hidden>Average cost of living
+  <section id="start">
+    <div id="overlay"></div>
+    <div class="ptext">
+      <div class="border">
+        <form class="form" id="searchForm">
+          <h2>Looking for something?</h2>
+
+          <select name="city">
+            <option value="" selected disabled hidden>City</option>
+            <option value="Iasi">Iasi</option>
+            <option value="Bucuresti">Bucuresti</option>
+            <option value="Cluj">Cluj</option>
+            <option value="Constanta">Constanta</option>
+          </select>
+          <br>
+          <select name="category" id="chooseFields">
+            <option value="" selected disabled hidden>House Type</option>
+            <option value="Apartment">Apartment</option>
+            <option value="House">House</option>
+            <option value="Land">Land</option>
+          </select>
+          <br>
+          <select name="type">
+            <option value="" selected disabled hidden>Selling Type</option>
+            <option value="Sell">Sell</option>
+            <option value="Rent">Rent</option>
+          </select>
+          <br>
+          <div id="appartmentDiv" style="width:100%;">
+           <select id="partitioning">
+             <option value="" selected disabled hidden>Partitioning</option>
+              <option value="detached" name="detached">Detached</option>
+              <option value="semiDetached" name="semiDetached">Semi Detached</option>
+            </select> <br>
+           <select id="comfort">
+             <option value="" selected disabled hidden>Comfort</option>
+              <option value="1" name="c1">1</option>
+              <option value="2" name="c2">2</option>
+              <option value="3" name="c3">3</option>
+              <option value="4" name="c4">4</option>
+              <option value="5" name="c5">5</option>
+            </select> <br>
+           <select id="floor">
+             <option value="" selected disabled hidden>Floor</option>
+              <option value="0" name="f1">0</option>
+              <option value="1" name="f1">1</option>
+              <option value="2" name="f2">2</option>
+              <option value="3" name="f3">3</option>
+              <option value="4" name="f4">4</option>
+              <option value="5" name="f5">5</option>
+              <option value="6" name="f6">6</option>
+              <option value="7" name="f7">7</option>
+              <option value="8" name="f8">8</option>
+              <option value="9" name="f9">9</option>
+              <option value="10" name="f10">10</option>
+            </select> <br>
+              <select id="nr_of_rooms">
+                  <option value="" selected disabled hidden>Number of rooms</option>
+              <option value="1" name="r1">1</option>
+              <option value="2" name="r2">2</option>
+              <option value="3" name="r3">3</option>
+              <option value="4" name="r4">4</option>
+              <option value="5" name="r5">5</option>
+            </select> <br>
+            
+
+          </div>
+
+
+          <div id="houseDiv">
+           <input type="number" id="year" min="1925" max="2019"  placeholder=" Construction year ">
+          </div>
+
+          <div id="landDiv">
+
+            <select name="land_classification" id="land_classification" style="margin-left:-8px;">
+                <option value="" selected disabled hidden> Land Clasification </option>
+              <option value="incorporated" name="incorporated">Incorporated
               </option>
+              <option value="unincorporated" name="unincorporated">Unincorporated area</option>
             </select>
-            <br>
-            <select name="money">
-              <option value="" selected disabled hidden>Price</option>
-            </select>
-            <br>
-            <button type="submit" class="button button-cauta"><i class="fas fa-search"></i>Search</button>
-          </form>
-        </div>
-      </div> 
+                <select>
+        <option value="" selected disabled hidden> Ground Type</option>
+              <option value="agriculturalLand" name="agriculturalLand" >Agricultural Land
+              </option>
+              <option value="constructionLand" name="constructionLand">Construction Land</option>
+              <option disabled value="TEODORA" name="TEODORA">Casa de veci = Locul unde mori (Teodora 2k19)
+              </option>
+
+                </select>
+              <br>
+
+
+          </div>
+
+
+          <script>
+            document.getElementById("houseDiv").style.display = "none";
+            document.getElementById("appartmentDiv").style.display = "none";
+            document.getElementById("landDiv").style.display = "none";
+            document.getElementById("chooseFields").addEventListener("change", function (e) {
+              var selectedField = this.options[this.selectedIndex].value;
+              document.getElementById("houseDiv").style.display = "none";
+              document.getElementById("appartmentDiv").style.display = "none";
+              document.getElementById("landDiv").style.display = "none";
+              if (selectedField === "House") {
+                document.getElementById("houseDiv").style.display = "block";
+            
+              }
+              if (selectedField === "Apartment") {
+                document.getElementById("appartmentDiv").style.display = "block";
+                
+              }
+              if (selectedField === "Land") {
+                document.getElementById("landDiv").style.display = "block";
+               
+              }
+
+
+
+              document.getElementById("searchform").addEventListener("submit", function (e) {
+            e.preventDefault();
+            var data = {};
+
+            if (selectedField == "House") {
+            if(document.getElementById("year").value!=null)	
+            var construction_year = document.getElementById("year").value;
+						}
+
+						if (selectedField == "Apartment") {
+						if(document.getElementById("partitioning").value!=null)	var partitioning = document.getElementById("partitioning").value;
+						if(document.getElementById("comfort").value!=null)	var comfort = document.getElementById("comfort").value;
+            if(document.getElementById("floor").value!=null)	var floor = document.getElementById("floor").value;
+            if(document.getElementById("nr_of_rooms").value!=null) var nr_of_rooms = document.getElementById("nr_of_rooms").value;}
+              
+              if (selectedField == "Ground") {
+							if(document.getElementById("ground_type").value!=null) var ground_type = document.getElementById("ground_type").value;
+							if(document.getElementById("land_classification").value!=null) var land_classification = document.getElementById("land_classification").value;}
+              
+          });
+            });
+          </script>
+          <select name="polution">
+            <option value="" selected disabled hidden>Pollution</option>
+          </select>
+          <br>
+          <select name="traffic">
+            <option value="" selected disabled hidden>Traffic</option>
+          </select>
+          <br>
+          <select name="anualSpent">
+            <option value="" selected disabled hidden>Average cost of living
+            </option>
+          </select>
+          <br>
+          <select name="money">
+            <option value="" selected disabled hidden>Price</option>
+          
+          </select>
+
+
+          <br>
+          <button type="submit" class="button button-cauta"><i class="fas fa-search"></i>Search</button>
+
+        </form>
+      </div>
+    </div>
+
   </section>
 
 
-<section id="second">
+  <section id="second">
 
-  <% announcements.forEach((ann) => { %>
+    <% announcements.forEach((ann) => { %>
 
-      <article class="carding">
-        <div class="card-header">
-<!--          <img src="img/chuttersnap-348307-unsplash.jpg" alt="thumbnail2">-->
-          <img src="<%= ann.images[0]%>" alt="thumbnail2">
-          <div class="card-title">
-            <h2> <%= ann.type %> </h2>
-            <h2> <%= ann.price %> &euro;</h2>
-          </div>
+    <article class="carding">
+      <div class="card-header">
+      <img src="img/chuttersnap-348307-unsplash.jpg" alt="thumbnail2">
+        <div class="card-title">
+          <h2> <%= ann.type %> </h2>
+          <h2> <%= ann.price %> &euro;</h2>
         </div>
-        <div class="card-content">
-          <h4> <%= ann.title %> </h4>
-          <hr>
-          <p> <%= ann.description %> </p>
-          <hr>
-          <button class="button button-cauta" onclick="location.href='/announcementsDetail/<%= ann._id %>'">More details</button>
-        </div>
-      </article>
+      </div>
+      <div class="card-content">
+        <h4> <%= ann.title %> </h4>
+        <hr>
+        <p> <%= ann.description %> </p>
+        <hr>
+        <button class="button button-cauta" onclick="location.href='/announcementsDetail/<%= ann._id %>'">More
+          details</button>
+      </div>
+    </article>
 
-  <%});%>
+    <%});%>
 
-  <% if (announcements.length === 0) { %>
-  <h4> No announcements matching criteria! </h4>
-  <% } %>
+    <% if (announcements.length === 0) { %>
+    <h4> No announcements matching criteria! </h4>
+    <% } %>
 
 
-</section>
+  </section>
 </body>
+
 </html>
