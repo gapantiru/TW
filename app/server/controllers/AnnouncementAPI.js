@@ -20,7 +20,7 @@ class AnnouncementAPI{
                     }
                 })
                 .catch(err => {
-                    next(err);
+                    utils.send_error_json(res, 500, "Internal error!");
                 })
         }
         else
@@ -35,7 +35,7 @@ class AnnouncementAPI{
                         }
                     })
                     .catch(err => {
-                        next(err);
+                        utils.send_error_json(res, 500, "Internal error!");
                     })
             }
 
@@ -57,7 +57,7 @@ class AnnouncementAPI{
                 }
             })
             .catch(err =>{
-                next(err);
+                utils.send_error_json(res, 500, "Internal error!");
             })
     }
 
@@ -167,6 +167,15 @@ class AnnouncementAPI{
                         if(element.description) {
                             marker.description = element.description;
                         }
+                        if(element.title) {
+                            marker.title = element.title;
+                        }
+                        if(element.price) {
+                            marker.price = element.price;
+                        }
+                        if(element._id){
+                            marker._id = element._id;
+                        }
 
                         markers.push(marker);
                     });
@@ -178,7 +187,7 @@ class AnnouncementAPI{
                 }
             })
             .catch( err => {
-                next(err);
+                utils.send_error_json(res, 500, "Internal error!");
             })
 
     }

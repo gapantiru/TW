@@ -10,6 +10,8 @@ function initialize() {
 	  .then(response => response.json())
 	  .then(resp => {
 			markere = resp;
+			console.log(markere);
+			console.log(resp);
 			
 
 			
@@ -86,7 +88,7 @@ google.maps.event.addListener( searchBox, 'places_changed', function () {
 for( i = 0; i < markere.length; i++ ) {
 
 			
-contentString = '<h3>'+markere[i].title+'</h3>'+'<p>'+markere[i].price+'&#x20AC'+'</p';
+contentString = '<a href="/announcementsDetail/' + markere[i]._id + '"><h3>'+markere[i].title+'</h3></a>'+'<p>'+markere[i].price+'&#x20AC'+'</p';
 
 var infowindow = new google.maps.InfoWindow({content: contentString
 }), marker, i;

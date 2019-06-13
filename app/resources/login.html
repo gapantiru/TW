@@ -102,7 +102,6 @@
                 throw new TypeError ('Datele primite nu-s JSON');
             })
             .then(response => {
-                //TODO:save JWT token from response;
                 if (response.status === 200) {
                     clear_form();
                     redirect_on_succes();
