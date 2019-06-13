@@ -44,7 +44,7 @@ class AnnouncementAPI{
     static getAnnouncementById(req, res, next){
         let annId = req.params.id;
         if (!mongoose.Types.ObjectId.isValid(annId)){
-            utils.send_error_json(res, "Invalid announcement id!");
+            utils.send_error_json(res, 400,"Invalid announcement id!");
         }
         Announcement.findById({_id: mongoose.Types.ObjectId(annId)})
             .then( announcement =>{

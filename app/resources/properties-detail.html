@@ -122,7 +122,7 @@
       <hr>
       <h2>Number of rooms: <%= specific.nr_of_rooms %> </h2>
       <hr>
-      <h2>Surface: <%= specific.surface %> </h2>
+      <h2>Surface: <%= specific.surface %> mp</h2>
       <hr>
     </div>
 
@@ -131,11 +131,11 @@
   <% if(announcement.category === "House") { %>
     <% let specific = announcement.specific_data.house; %>
     <div class="technical house">
-      <h2>Land area: <%= specific.land_area %> </h2>
+      <h2>Land area: <%= specific.land_area %> mp</h2>
       <hr>
       <h2>Construction year: <%= specific.construction_year %> </h2>
       <hr>
-      <h2>Surface: <%= specific.surface %> </h2>
+      <h2>Surface: <%= specific.surface %> mp</h2>
       <hr>
     </div>
 
@@ -147,7 +147,7 @@
     <div class="technical land">
       <h2>Land type: <%= specific.land_type %> </h2>
       <hr>
-      <h2>Land area: <%= specific.land_area %> </h2>
+      <h2>Land area: <%= specific.land_area %> mp</h2>
       <hr>
       <h2>Land classification: <%= specific.land_classification %> </h2>
       <hr>

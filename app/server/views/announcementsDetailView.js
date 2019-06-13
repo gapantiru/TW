@@ -47,7 +47,7 @@ class AnnouncementsDetailView{
             })
 
             .catch(err =>{
-                next(err);
+                next("Internal error!");
             })
 
     }

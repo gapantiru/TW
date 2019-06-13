@@ -51,15 +51,17 @@
     <div id="overlay"></div>
     <div class="ptext">
 
-
       <form action="/announcements" method="GET">
         <h2>YOUR NEW HOME AWAITS</h2>
         <select name="city">
           <option value="" selected disabled hidden>City</option>
-          <option value="Iasi">Iasi</option>
-          <option value="Bucuresti">Bucuresti</option>
-          <option value="Cluj">Cluj</option>
-          <option value="Constanta">Constanta</option>
+          <% cities.forEach((city) => { %>
+          <option value="<%= city%>"><%= city %></option>
+          <% }); %>
+<!--          <option value="Iasi">Iasi</option>-->
+<!--          <option value="Bucuresti">Bucuresti</option>-->
+<!--          <option value="Cluj">Cluj</option>-->
+<!--          <option value="Constanta">Constanta</option>-->
         </select>
         <br>
         <select name="category">

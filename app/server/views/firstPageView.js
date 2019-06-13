@@ -17,7 +17,9 @@ class FirstPageView {
         const default_sort = {date : 'desc'};
         const limit_ann_number = 6;
 
-        let items = {announcements: []};
+        let items = {
+            cities: [],
+            announcements: []};
 
         Announcements.find({})
             .sort(default_sort)
@@ -27,11 +29,23 @@ class FirstPageView {
                 announcements.forEach( ann => {
                     items.announcements.push(ann);
                 });
-                renderer.send(res, 'FirstPage.html', items, next);
+                Announcements.distinct('city')
+                    .then( cities => {
+                        if(cities){
+                            cities.forEach( city =>{
+                                items.cities.push(city);
+                            })
+                        }
+                        renderer.send(res, 'FirstPage.html', items, next);
+                    })
+                    .catch( err => {
+                        next("Internal error!");
+                    });
+                // renderer.send(res, 'FirstPage.html', items, next);
             })
 
             .catch( err =>{
-                next(err);
+                next("Internal error!");
             })
 
 
