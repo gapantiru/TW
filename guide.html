@@ -13,89 +13,126 @@
 
     <div id="toc_container">
         <ul class="toc_list">
-            <li><a href="#intro">1. Introduction</a></li>
+            <li><a href="#general">1. Introduction</a></li>
             <li><a href="#login">2. Creating an Account and Logging in</a>
                 <ul>
-                    <li><a href="#register">2.1 How to Create an Account</a></li>
-                    <li><a href="#login">2.2 How to Login </a></li>
+                    <li><a href="#register">2.1 Register</a></li>
+                    <li><a href="#login">2.2 Log in </a></li>
                 </ul>
             </li>
             <li><a href="#website">3. What Our Website Offers</a>
                 <ul>
                     <li><a href="#see">3.1 Seeing Announcements </a></li>
                     <li><a href="#filter">3.2 Filtering Announcements </a></li>
-                    <li><a href="#adding">3.3 Adding Personal Announcements </a></li>
-                    <li><a href="#deleting">3.4 Deleting Personal Announcements </a></li>
+                    <li><a href="#add">3.3 Adding Personal Announcements </a></li>
+                    <li><a href="#delete">3.4 Deleting Personal Announcements </a></li>
                     <li><a href="#viewStaticMap">3.5 View Static Map </a></li>
                     <li><a href="#viewGlobalMap">3.6 View Global Map </a></li>
-                    <li><a href="#markers">3.6 Map Markers </a></li>
+                    <li><a href="#markers">3.7 Map Markers </a></li>
                 </ul>
             </li>
         </ul>
     </div>
 
 
-    <section id="intro">
+    <section id="general">
         <h2> 1. Intro </h2>
-        <p> PerF is an web application meant to effectively manage imobiliar transaction. The system allows the menagement of some building,apartments,lands for selling/renting. We will also offer information about price,description,coordinates, contact date, and others. We are using a localisation service (Google Map).</p>
+        <p> PerF is an web application meant to effectively manage real estate transaction. The system allows the
+            menagement of buildings,apartments,lands that are for selling/renting. We also offer information about
+            price, description, coordinates, contact date, etc. We are using a localization service (Google Map).
+        </p>
+        <img src="img/homePage.png" style="width: 50%">
     </section>
 
     <section id="login">
         <h2> 2. Creating an account and logging in </h2>
         <p> In order to have access to our website, you need to create an account.. </p>
-        <!-- de adaugat imaginile-->
-        <h2 id="register"> 2.1 How to Create an Account </h2>
+
+        <h2 id="register"> 2.1 Register </h2>
         <ol>
-            <li> On the home page, press the button "Register" in the upper-right corner of the page. You will be
-                redirected to the Register page.</li>
-            <img src="images/register-button.PNG" style="width: 50%">
-            <li> On the Register pagell of the information in the form is required, as it is needed to be able to
-                store important data needed for our functionalities. <br>
-                <strong>Complete the fields carefully</strong>, choosing a <strong>valid email</strong> (if we need to
-                contact you or send notifications to you) and a <strong> strong passphrase</strong>. </li>
-            <li> After you have completed filling out the fields, press the <em><strong>Submit!</strong></em> button.
-                This will take you back to the home page. From now on, you will be able to log in. </li>
+            <li> To make a new account, you have to access the navbar section called <strong>Register</strong>. Clicking
+                on it will take you to the registration page.</li>
+
+            <img src="img/register.png" style="width: 50%">
+
+            <li> On the Register page, all of the information in the form is required, as it is needed to be able to
+                store important data needed for our functionalities: <strong>fist name</strong>, <strong>last
+                    name</strong>, <strong>email address</strong>, <strong>phone number</strong> and
+                <strong>password</strong>. <br>
+            </li>
+            <li> After you have completed filling out the fields, press the <em><strong>Register</strong></em> button.
+                This will take you to the log in page.
+            </li>
         </ol>
-        <h2 id="login"> 2.2 How to Log in</h2>
+        <h2 id="login"> 2.2 Log in</h2>
         <ol>
             <li>In order to login, you have to press the button <em><strong> Login </strong></em> located in the upper
-                right section of the page. </li>
-            <img src="images/register-button.png" style="width: 50%">
-            <li> You need to provide the email you registered with and your passphrase. </li>
-            <li> After that, you can press the button "Login". If you provided the correct information, then the login
-                is successful and you will be redirected to the login page. </li>
+                right section of the page. In case you have just registered, you will be automatically redirected to the
+                log in page. </li>
+
+            <img src="img/login.png" style="width: 50%">
+
+            <li> You need to provide the email you registered with and your password. </li>
+            <li> After that, you can press the button <strong>Login</strong>. If you provided the correct information,
+                then the login is successful and you will be redirected to the main page. </li>
         </ol>
     </section>
 
     <section id="website">
         <h2> 3. What Our Website Offers </h2>
-        <p> Through Event-Time, we want to provide anyone that enters our website with the essential information
-            regarding events happening around the world.
-        </p>
-        <p> This is why we provide users with breaking new events. <strong> You do not need to log in or have an
-                account in order to access this information. </strong></p>
+       
+        <h2 id="see"> 3.1 Seeing Announcements </h2>
+        <p> Right on the first page you can see the latest 6 announcements and it gives you the possibility to search
+            for the right property for you! </p>
+        <img src="img/announcements-home.png" style="width: 50%">
+        <img src="img/Announcement.png" style="width: 50%">
 
 
-        <h2 id="subscribe"> 3.1 Subscribe to tags </h2>
-        <p> On our website after you register you have to add some tags you're interested in as we have to know
-            what kind of events to show to you. </p>
-        <img src="images/subscribe.PNG" style="width: 50%">
+        <h2 id="filter"> 3.2 Filtering Announcements</h2>
+        <p> Having plenty of filters to choose from, you can now find the perfect apartment to rent, the best house to
+            buy
+            or even a land to rent. </p>
+        <p> You can find this filter area in the header of the Home page or the Properties page. </p>
+        <img src="img/firstPage.png" style="width: 50%">
 
 
-        <h2 id="request"> 3.2 Make a request to change an event </h2>
-        <p> As you may browse on out website you may see an event that has some inadequate or incorrect info so
-            if you want an admin to know that there is a problem, you can make a request to change a/some fields
-            regarding that event. </p>
-        <p> You can find this button on the upper-right side of an event card. </p>
-        <img src="images/change-request.png" style="width: 90%">
+        <h2 id="add"> 3.3 Adding Announcements </h2>
+        <p> As you may want to have a list a property of your own that you want to sell or rent out, we got you covered
+            with an
+            <strong>Add new announcement</strong>
+            option. You just have to think of an interesting title to chatch your possible customers' eye, fill in some
+            more specific details about the property you want to rent out/sell, add some photos, click the
+            <strong>Submit</strong>button and you're all set! </p>
+        <p> Your property is now listed among the other announcements. You can see it in the Properties page, on your
+            profile and on the Home page</p>
+        <img src="img/addAnnouncement.png" style="width: 80%">
+        <img src="img/addAnnProp.png" style="width: 30%">
+        <img src="img/addAccouncement-img.png" style="width: 30%">
 
+        <h2 id="delete"> 3.4 Deleting Personal Announcements </h2>
+        <p> If you managed to sell/rent out your property and you no longer want the announcement to be shown, you can
+            <strong>Delete</strong> it, using the button placed on the announcement card in your account page.
+            <p> After the announcement is removed, a message will show up that it was successfully deleted</p>
+            <img src="img/deleteButton.png" style="width: 20%">
 
-        <h2 id="export"> 3.3 Export iCalendar </h2>
-        <p> As you may want to have a list of the events your interested in, we got you covered with an
-            <strong>Export</strong>
-            button, this will make an calendar in iCalendar format and download it. </p>
-        <p> You can find it in the right-most side of the <strong>Upcoming events</strong> section.</p>
-        <img src="images/export-button.PNG" style="width: 90%">
+            <h2 id="viewStaticMap"> 3.5 View Static Map </h2>
+            <p> At the end of the Property Details page, you can also see a Google Map that has a mark on it. The mark
+                represents the exact location the the property you're currently seeing</p>
+            <p> You can also use Street View to move around the area and see the zone better. </p>
+            <img src="img/staticMap.png" style="width: 50%">
+
+            <h2 id="viewGlobalMap"> 3.6 View Global Map </h2>
+            <p> You can access a map that has markers for all the properties listed on our Website. </p>
+            <p> If you want to see all the properties located in a specific area, just use the search box above the map.
+            </p>
+            <img src="img/globalMap.png" style="width: 50%">
+
+            <h2 id="markers"> 3.7 Map Markers </h2>
+            <p> When a user adds an announcement, he has the possibility to choose the address that the property he is
+                listing is located. Automatically, a red marker is placed on the map found on the Details page and also
+                the map that contains all of the properties' markes, found on the Map page. </p>
+            <p> You can also click on the marker to see the name and the price of the property listed under that address.</p>
+            <img src="img/annClick.png" style="width: 20%">
     </section>
 
     <section>
